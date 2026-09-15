@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRight, HeartPulse, ShieldCheck, Clock, UserCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Phone, ArrowRight, HeartPulse, Clock, UserCheck, Sparkles, CheckCircle2 } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
 
 interface HeroProps {
@@ -9,7 +9,7 @@ interface HeroProps {
 
 export default function Hero({ onOpenBooking }: HeroProps) {
   return (
-    <section id="home" className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-blue-50/40 to-white pt-8 pb-20 lg:pt-14 lg:pb-28">
+    <section id="home" className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-blue-50/40 to-white pt-8 pb-24 lg:pt-14 lg:pb-32">
       {/* Subtle Background Glow Circles */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/30 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute top-10 right-10 w-96 h-96 bg-cyan-200/20 rounded-full blur-3xl pointer-events-none" />
@@ -87,78 +87,69 @@ export default function Hero({ onOpenBooking }: HeroProps) {
             </div>
           </motion.div>
 
-          {/* Right Hero Visual Composition */}
+          {/* Right Hero Visual */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-5 relative flex justify-center items-center"
+            className="lg:col-span-5 relative flex justify-center items-center py-8"
           >
-            {/* Main Rounded Nurse Image Container */}
-            <div className="relative w-full max-w-md aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-gradient-to-br from-brand-100 to-cyan-50">
-              <img
-                src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80"
-                alt="Professional Indian Home Nurse Caring for Patient"
-                className="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-900/60 via-transparent to-transparent" />
-              
-              <div className="absolute bottom-6 left-6 right-6 text-white">
-                <span className="inline-block px-3 py-1 bg-cyan-500/90 text-xs font-bold rounded-full mb-2 backdrop-blur-md">
-                  Surat & Ahmedabad
-                </span>
-                <p className="text-sm font-semibold text-white/90">
-                  Certified Male & Female Caregivers
-                </p>
+            {/* Image Card */}
+            <div className="relative w-full max-w-sm lg:max-w-md">
+
+              {/* Image container — clips to rounded corners */}
+              <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+                <img
+                  src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80"
+                  alt="Professional Indian Home Nurse Caring for Patient"
+                  className="w-full h-full object-cover object-top"
+                />
+                {/* Bottom gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-brand-900/10 to-transparent" />
+                {/* Bottom label */}
+                <div className="absolute bottom-5 left-5 right-5 text-white">
+                  <span className="inline-block px-3 py-1 bg-cyan-500 text-xs font-bold rounded-full mb-1.5">
+                    Surat &amp; Ahmedabad
+                  </span>
+                  <p className="text-sm font-semibold text-white/90">
+                    Certified Male &amp; Female Caregivers
+                  </p>
+                </div>
               </div>
+
+              {/* Floating Card 1 — top left */}
+              <motion.div
+                animate={{ y: [0, -8, 0] }}
+                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                className="absolute -top-5 -left-5 sm:-left-8 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-slate-100 flex items-center space-x-3 z-20"
+              >
+                <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center">
+                  <Clock className="w-5 h-5 text-brand-700" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Availability</p>
+                  <p className="text-sm font-extrabold text-brand-900">24/7 Home Care</p>
+                </div>
+              </motion.div>
+
+              {/* Floating Card 2 — bottom center */}
+              <motion.div
+                animate={{ y: [0, -6, 0] }}
+                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}
+                className="absolute -bottom-5 -right-5 sm:-right-8 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center space-x-3 z-20 whitespace-nowrap"
+              >
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                  <UserCheck className="w-5 h-5 text-emerald-600" />
+                </div>
+                <div>
+                  <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Certified Staff</p>
+                  <p className="text-sm font-extrabold text-slate-900">Pro Nurses</p>
+                </div>
+              </motion.div>
+
             </div>
-
-            {/* Floating Medical Card 1: 24/7 Care */}
-            <motion.div
-              animate={{ y: [0, -8, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="absolute -top-4 -left-4 sm:-left-8 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center space-x-3 z-20"
-            >
-              <div className="w-11 h-11 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center font-bold">
-                <Clock className="w-6 h-6 text-brand-700" />
-              </div>
-              <div>
-                <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Availability</p>
-                <p className="text-base font-extrabold text-brand-900">24/7 Home Care</p>
-              </div>
-            </motion.div>
-
-            {/* Floating Medical Card 2: Professional Nurses */}
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}
-              className="absolute top-1/2 -right-4 sm:-right-8 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-slate-100 flex items-center space-x-3 z-20"
-            >
-              <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
-                <UserCheck className="w-6 h-6 text-emerald-600" />
-              </div>
-              <div>
-                <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Certified Staff</p>
-                <p className="text-base font-extrabold text-slate-900">Professional Nurses</p>
-              </div>
-            </motion.div>
-
-            {/* Floating Medical Card 3: Personalized Support */}
-            <motion.div
-              animate={{ y: [0, -6, 0] }}
-              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut", delay: 0.5 }}
-              className="absolute -bottom-6 left-1/2 -translate-x-1/2 bg-brand-800 text-white p-4 rounded-2xl shadow-2xl border border-white/20 flex items-center space-x-3 z-20 w-[85%]"
-            >
-              <div className="w-10 h-10 rounded-full bg-cyan-500 text-white flex items-center justify-center flex-shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-xs text-cyan-300 font-semibold">Verified Quality</p>
-                <p className="text-sm font-bold text-white">Personalized Medical Support</p>
-              </div>
-            </motion.div>
-
           </motion.div>
+
 
         </div>
       </div>
