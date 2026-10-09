@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Phone, Menu, X, MapPin, Clock } from 'lucide-react';
+import { Phone, Menu, X, MapPin, Clock, Sun, Moon } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
+import { useTheme } from '../context/ThemeContext';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -11,6 +12,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,7 +51,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   return (
     <header className="sticky top-0 z-[1000] w-full transition-all duration-300">
       {/* Top Banner Bar */}
-      <div className="bg-brand-800 text-white text-xs py-2 px-4 border-b border-white/10 hidden sm:block">
+      <div className="bg-brand-800 dark:bg-slate-900 text-white text-xs py-2 px-4 border-b border-white/10 dark:border-slate-800 hidden sm:block">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-6">
             <span className="flex items-center space-x-1.5 text-cyan-400 font-medium">
@@ -76,8 +78,8 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
       <nav
         className={`w-full transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/95 backdrop-blur-md shadow-md py-3 border-b border-slate-100'
-            : 'bg-white/80 backdrop-blur-sm py-4'
+            ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-md py-3 border-b border-slate-100 dark:border-slate-800'
+            : 'bg-white/80 dark:bg-slate-900/80 backdrop-blur-sm py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -89,14 +91,13 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               alt="RIYA MEDICARE Logo"
               className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105"
               onError={(e) => {
-                // Fallback to symbol if logo path differs
                 (e.target as HTMLImageElement).src = COMPANY_INFO.symbolUrl;
               }}
             />
           </a>
 
           {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center space-x-1 bg-slate-100/70 p-1.5 rounded-full border border-slate-200/60">
+          <div className="hidden lg:flex items-center space-x-1 bg-slate-100/70 dark:bg-slate-800/70 p-1.5 rounded-full border border-slate-200/60 dark:border-slate-700/60">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -104,13 +105,15 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   key={link.id}
                   href={link.href}
                   className={`relative px-4 py-2 text-sm font-semibold rounded-full transition-all duration-200 ${
-                    isActive ? 'text-brand-700 font-bold' : 'text-slate-600 hover:text-brand-700'
+                    isActive
+                      ? 'text-brand-700 dark:text-cyan-400 font-bold'
+                      : 'text-slate-600 dark:text-slate-300 hover:text-brand-700 dark:hover:text-cyan-300'
                   }`}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeTab"
-                      className="absolute inset-0 bg-white rounded-full shadow-sm"
+                      className="absolute inset-0 bg-white dark:bg-slate-700 rounded-full shadow-sm"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -122,9 +125,23 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
           {/* Right Action CTA */}
           <div className="hidden sm:flex items-center space-x-3">
+            {/* Theme Toggle Switcher */}
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors border border-slate-200 dark:border-slate-700"
+              title={theme === 'dark' ? 'Switch to Light Theme' : 'Switch to Dark Theme'}
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-4 h-4 text-amber-400" />
+              ) : (
+                <Moon className="w-4 h-4 text-brand-700" />
+              )}
+            </button>
+
             <a
               href={`tel:${COMPANY_INFO.phone}`}
-              className="flex items-center space-x-2 px-4 py-2.5 rounded-full border border-brand-700 text-brand-700 font-semibold text-sm hover:bg-brand-700 hover:text-white transition-all shadow-sm"
+              className="flex items-center space-x-2 px-4 py-2.5 rounded-full border border-brand-700 dark:border-cyan-400 text-brand-700 dark:text-cyan-400 font-semibold text-sm hover:bg-brand-700 hover:text-white dark:hover:bg-cyan-400 dark:hover:text-slate-900 transition-all shadow-sm"
             >
               <Phone className="w-4 h-4" />
               <span>Call {COMPANY_INFO.phone}</span>
@@ -132,14 +149,26 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
             <button
               onClick={onOpenBooking}
-              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-700 to-brand-600 text-white font-semibold text-sm hover:shadow-lg hover:shadow-brand-700/20 hover:-translate-y-0.5 transition-all"
+              className="px-5 py-2.5 rounded-full bg-gradient-to-r from-brand-700 to-brand-600 dark:from-cyan-500 dark:to-cyan-600 text-white font-semibold text-sm hover:shadow-lg hover:shadow-brand-700/20 transition-all"
             >
               Book Home Care
             </button>
           </div>
 
-          {/* Mobile Hamburger Toggle Button */}
+          {/* Mobile Hamburger Toggle & Theme Switcher */}
           <div className="lg:hidden flex items-center space-x-2">
+            <button
+              onClick={toggleTheme}
+              aria-label="Toggle Theme"
+              className="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200"
+            >
+              {theme === 'dark' ? (
+                <Sun className="w-5 h-5 text-amber-400" />
+              ) : (
+                <Moon className="w-5 h-5 text-brand-700" />
+              )}
+            </button>
+
             <button
               onClick={onOpenBooking}
               className="sm:hidden px-3 py-1.5 rounded-full bg-brand-700 text-white font-semibold text-xs"
@@ -149,7 +178,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl text-brand-800 hover:bg-slate-100 transition-colors"
+              className="p-2 rounded-xl text-brand-800 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               aria-label="Toggle Navigation Menu"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -164,7 +193,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden bg-white border-t border-slate-100 px-4 pt-3 pb-6 shadow-xl overflow-hidden"
+              className="lg:hidden bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 px-4 pt-3 pb-6 shadow-xl overflow-hidden"
             >
               <div className="flex flex-col space-y-2">
                 {navLinks.map((link) => (
@@ -174,18 +203,18 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`px-4 py-2.5 rounded-xl font-medium text-base transition-colors ${
                       activeSection === link.id
-                        ? 'bg-brand-50 text-brand-700 font-bold'
-                        : 'text-slate-700 hover:bg-slate-50'
+                        ? 'bg-brand-50 dark:bg-slate-800 text-brand-700 dark:text-cyan-400 font-bold'
+                        : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800'
                     }`}
                   >
                     {link.name}
                   </a>
                 ))}
 
-                <div className="pt-4 border-t border-slate-100 flex flex-col space-y-3">
+                <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-col space-y-3">
                   <a
                     href={`tel:${COMPANY_INFO.phone}`}
-                    className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl border border-brand-700 text-brand-700 font-semibold"
+                    className="w-full flex items-center justify-center space-x-2 py-3 rounded-xl border border-brand-700 dark:border-cyan-400 text-brand-700 dark:text-cyan-400 font-semibold"
                   >
                     <Phone className="w-4 h-4" />
                     <span>Call +91 {COMPANY_INFO.phone}</span>
@@ -196,7 +225,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                       setMobileMenuOpen(false);
                       onOpenBooking();
                     }}
-                    className="w-full py-3 rounded-xl bg-brand-700 text-white font-semibold shadow-md"
+                    className="w-full py-3 rounded-xl bg-brand-700 dark:bg-cyan-500 text-white dark:text-slate-900 font-semibold shadow-md"
                   >
                     Book Home Care
                   </button>

@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -18,6 +19,7 @@ export default {
           700: '#0b3c7d', // Primary Deep Blue
           800: '#072856', // Dark Royal Blue
           900: '#041738', // Midnight Navy
+          950: '#020d20', // Deepest Navy
         },
         gold: {
           400: '#fbbf24',

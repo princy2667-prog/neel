@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-
+import { ThemeProvider } from './context/ThemeContext';
 
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -41,7 +41,8 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans text-slate-900 selection:bg-brand-700 selection:text-white">
+    <ThemeProvider>
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 selection:bg-brand-700 selection:text-white transition-colors duration-300">
 
 
 
@@ -77,5 +78,6 @@ export default function App() {
         initialProcedureTitle={selectedProcedureTitle}
       />
     </div>
+    </ThemeProvider>
   );
 }
