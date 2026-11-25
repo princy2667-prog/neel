@@ -69,7 +69,7 @@ export default function BookingModal({
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 z-[2000] bg-brand-950/75 backdrop-blur-md flex items-center justify-center p-4"
+        className="fixed inset-0 z-[2000] bg-sig-navy/75 flex items-center justify-center p-4"
         onClick={onClose}
       >
         <motion.div
@@ -77,23 +77,23 @@ export default function BookingModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           onClick={(e) => e.stopPropagation()}
-          className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-100 overflow-hidden max-h-[90vh] flex flex-col"
+          className="bg-surface text-ink max-w-lg w-full border-[3px] border-ink shadow-brut-lg overflow-hidden max-h-[90vh] flex flex-col"
         >
           {/* Modal Header */}
-          <div className="bg-gradient-to-r from-brand-900 to-brand-700 text-white p-6 flex justify-between items-center flex-shrink-0">
+          <div className="bg-sig-navy text-sig-white p-5 flex justify-between items-center flex-shrink-0 border-b-[3px] border-ink">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-wider text-cyan-300 bg-white/10 px-2.5 py-0.5 rounded-full inline-flex items-center space-x-1 mb-1">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-sig-navy bg-sig-sky px-2.5 py-0.5 inline-flex items-center space-x-1 mb-2">
                 <Sparkles className="w-3 h-3 text-cyan-400" />
                 <span>24/7 Home Care Booking</span>
               </span>
-              <h3 className="text-xl font-bold text-white">
+              <h3 className="text-xl sm:text-2xl font-bold uppercase leading-none text-sig-white">
                 {isSubmitted ? 'Request Confirmed!' : 'Book Home Nursing / Caregiver'}
               </h3>
             </div>
 
             <button
               onClick={onClose}
-              className="p-2 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
+              className="p-2 bg-sig-azure text-sig-navy border-2 border-sig-white hover:bg-sig-sky transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -103,11 +103,11 @@ export default function BookingModal({
           <div className="p-6 sm:p-8 overflow-y-auto">
             {isSubmitted ? (
               <div className="text-center py-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-sig-cyan text-sig-navy border-[3px] border-sig-navy flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="w-10 h-10" />
                 </div>
 
-                <h4 className="text-2xl font-bold text-brand-900 mb-2">
+                <h4 className="text-2xl font-bold uppercase mb-2">
                   Thank You, {formData.patientName || 'Valued Patient'}!
                 </h4>
 
@@ -120,7 +120,7 @@ export default function BookingModal({
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full py-3.5 rounded-full bg-emerald-500 text-white font-bold text-sm hover:bg-emerald-600 transition-colors flex items-center justify-center space-x-2"
+                    className="brut-btn brut-btn--cyan w-full"
                   >
                     <MessageSquareHeart className="w-5 h-5" />
                     <span>Send Directly via WhatsApp</span>
@@ -128,7 +128,7 @@ export default function BookingModal({
 
                   <a
                     href={`tel:${COMPANY_INFO.phone}`}
-                    className="w-full py-3.5 rounded-full border border-brand-700 text-brand-700 font-bold text-sm hover:bg-brand-50 transition-colors flex items-center justify-center space-x-2"
+                    className="brut-btn brut-btn--paper w-full"
                   >
                     <Phone className="w-5 h-5" />
                     <span>Call Urgent Helpline: {COMPANY_INFO.phone}</span>
@@ -139,7 +139,7 @@ export default function BookingModal({
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Patient Name */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label className="block font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">
                     Patient Name *
                   </label>
                   <input
@@ -154,7 +154,7 @@ export default function BookingModal({
 
                 {/* Contact Phone */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label className="block font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">
                     Contact Phone Number *
                   </label>
                   <input
@@ -169,7 +169,7 @@ export default function BookingModal({
 
                 {/* City */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label className="block font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">
                     City Location *
                   </label>
                   <div className="grid grid-cols-2 gap-3">
@@ -180,8 +180,8 @@ export default function BookingModal({
                         onClick={() => setFormData({ ...formData, city: c })}
                         className={`py-2 rounded-xl border text-sm font-bold transition-all flex items-center justify-center space-x-1.5 ${
                           formData.city === c
-                            ? 'bg-brand-700 text-white border-brand-700 shadow-sm'
-                            : 'bg-slate-50 text-slate-700 border-slate-200'
+                            ? 'bg-sig-sky text-sig-navy border-ink shadow-brut-sm'
+                            : 'bg-surface text-ink border-ink'
                         }`}
                       >
                         <MapPin className="w-4 h-4" />
@@ -193,7 +193,7 @@ export default function BookingModal({
 
                 {/* Service */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label className="block font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">
                     Required Service / Procedure
                   </label>
                   <select
@@ -217,7 +217,7 @@ export default function BookingModal({
                 {/* Gender & Duration */}
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                    <label className="block font-mono text-[11px] font-bold uppercase tracking-wider mb-1">
                       Staff Gender
                     </label>
                     <select
@@ -232,7 +232,7 @@ export default function BookingModal({
                   </div>
 
                   <div>
-                    <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
+                    <label className="block font-mono text-[11px] font-bold uppercase tracking-wider mb-1">
                       Shift Duration
                     </label>
                     <select
@@ -250,7 +250,7 @@ export default function BookingModal({
 
                 {/* Notes */}
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-1.5">
+                  <label className="block font-mono text-[11px] font-bold uppercase tracking-wider mb-1.5">
                     Medical Condition / Address Notes
                   </label>
                   <textarea
@@ -264,7 +264,7 @@ export default function BookingModal({
 
                 <button
                   type="submit"
-                  className="w-full py-3.5 rounded-full bg-gradient-to-r from-brand-700 to-brand-600 text-white font-extrabold text-sm hover:shadow-lg transition-all"
+                  className="brut-btn brut-btn--azure w-full !py-4"
                 >
                   Submit Booking Request
                 </button>

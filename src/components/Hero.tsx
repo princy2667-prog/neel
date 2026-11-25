@@ -1,156 +1,172 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, ArrowRight, HeartPulse, Clock, UserCheck, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Phone, ArrowRight, Check, MapPin, HeartPulse, ShieldCheck } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
 
 interface HeroProps {
   onOpenBooking: () => void;
 }
 
+const container = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
+};
+
+const item = {
+  hidden: { opacity: 0, x: -28 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.4, ease: [0.7, 0, 0.2, 1] as const } },
+};
+
+const benefits = ['Male & Female Nurses', '24/7 Care Takers', 'ICU Care at Home', 'Doctor Home Visits'];
+
+const chartRows = [
+  ['Patient', 'Your loved one'],
+  ['City', 'Surat · Ahmedabad'],
+  ['Shift', '12h / 24h live-in'],
+  ['Nurse', 'Male / Female'],
+];
+
 export default function Hero({ onOpenBooking }: HeroProps) {
   return (
-    <section id="home" className="relative overflow-hidden bg-gradient-to-b from-slate-50 via-blue-50/40 to-white pt-8 pb-24 lg:pt-14 lg:pb-32">
-      {/* Subtle Background Glow Circles */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-200/30 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-10 right-10 w-96 h-96 bg-cyan-200/20 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Left Hero Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-7 flex flex-col items-start"
-          >
-            {/* Trust Badge */}
-            <div className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-brand-50 border border-brand-200/60 mb-6 shadow-sm">
-              <Sparkles className="w-4 h-4 text-cyan-600 animate-pulse" />
-              <span className="text-xs sm:text-sm font-semibold text-brand-800 tracking-wide">
-                24/7 Home Nursing & Care Services
+    <section id="home" className="ecg-paper relative overflow-hidden border-b-[3px] border-ink">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+          {/* ── Left: headline ── */}
+          <motion.div variants={container} initial="hidden" animate="visible" className="lg:col-span-7">
+            <motion.div
+              variants={item}
+              className="inline-flex items-stretch border-[3px] border-ink bg-surface shadow-brut-sm font-mono text-[11px] sm:text-xs font-bold uppercase mb-6"
+            >
+              <span className="bg-sig-azure text-sig-navy px-3 py-2 flex items-center gap-2">
+                <span className="w-2.5 h-2.5 bg-sig-navy animate-blink" />
+                On duty
               </span>
-            </div>
+              <span className="px-3 py-2 text-ink">Surat · 24/7 home healthcare</span>
+            </motion.div>
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-900 leading-[1.12] tracking-tight mb-6">
-              Professional Care.<br />
-              <span className="text-gradient">Right At Your Doorstep.</span>
-            </h1>
+            <motion.h1
+              variants={item}
+              className="text-[2.6rem] leading-[0.95] sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-bold text-ink mb-7"
+            >
+              Best Home Nursing &amp;{' '}
+              <span className="text-gradient">Healthcare Service in Surat</span>
+            </motion.h1>
 
-            {/* Supporting Text */}
-            <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl mb-8">
-              24/7 professional home nursing and caregiving services designed to provide compassionate, reliable and personalized care for your loved ones in Surat and Ahmedabad.
-            </p>
+            <motion.p
+              variants={item}
+              className="border-l-[6px] border-sig-azure pl-4 text-base sm:text-lg text-ink/80 leading-relaxed max-w-2xl mb-8"
+            >
+              Riya Medicare brings qualified nurses and 24-hour caretakers to your home in Surat — ICU setup at
+              home, elderly care, baby care, post-operative recovery and physiotherapy. From Adajan and Vesu to
+              Varachha and Katargam, compassionate care is a call away.
+            </motion.p>
 
-            {/* Quick Benefits Pills */}
-            <div className="grid grid-cols-2 gap-3 w-full max-w-xl mb-10">
-              <div className="flex items-center space-x-2 text-sm font-semibold text-slate-700 bg-white/80 backdrop-blur-sm p-2.5 rounded-xl border border-slate-200/60 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>Male & Female Nurses</span>
-              </div>
+            <motion.ul variants={item} className="grid grid-cols-1 min-[440px]:grid-cols-2 gap-3 max-w-xl mb-9">
+              {benefits.map((text) => (
+                <li
+                  key={text}
+                  className="flex items-center gap-3 border-[3px] border-ink bg-surface px-3 py-2.5 text-sm font-bold text-ink shadow-brut-sm"
+                >
+                  <span className="grid place-items-center w-6 h-6 bg-sig-cyan border-2 border-sig-navy text-sig-navy shrink-0">
+                    <Check className="w-4 h-4" strokeWidth={4} />
+                  </span>
+                  {text}
+                </li>
+              ))}
+            </motion.ul>
 
-              <div className="flex items-center space-x-2 text-sm font-semibold text-slate-700 bg-white/80 backdrop-blur-sm p-2.5 rounded-xl border border-slate-200/60 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>24/7 Care Takers</span>
-              </div>
-
-              <div className="flex items-center space-x-2 text-sm font-semibold text-slate-700 bg-white/80 backdrop-blur-sm p-2.5 rounded-xl border border-slate-200/60 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>ICU Care at Home</span>
-              </div>
-
-              <div className="flex items-center space-x-2 text-sm font-semibold text-slate-700 bg-white/80 backdrop-blur-sm p-2.5 rounded-xl border border-slate-200/60 shadow-sm">
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <span>Doctor Home Visits</span>
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center space-y-3 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-              <button
-                onClick={onOpenBooking}
-                className="group inline-flex items-center justify-center space-x-2 px-8 py-4 rounded-full bg-gradient-to-r from-brand-700 to-brand-600 text-white font-bold text-base hover:shadow-xl hover:shadow-brand-700/25 hover:-translate-y-0.5 transition-all"
-              >
-                <HeartPulse className="w-5 h-5 text-cyan-400 group-hover:scale-110 transition-transform" />
-                <span>Book Home Care</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            <motion.div variants={item} className="flex flex-col sm:flex-row gap-4">
+              <button onClick={onOpenBooking} className="brut-btn brut-btn--azure !py-4 !px-7 !text-sm">
+                <HeartPulse className="w-5 h-5" />
+                Book home care in Surat
+                <ArrowRight className="w-5 h-5" />
               </button>
-
-              <a
-                href={`tel:${COMPANY_INFO.phone}`}
-                className="inline-flex items-center justify-center space-x-2 px-7 py-4 rounded-full bg-white border-2 border-brand-700 text-brand-700 font-bold text-base hover:bg-brand-50 hover:shadow-md transition-all"
-              >
-                <Phone className="w-5 h-5 text-cyan-600" />
-                <span>Call {COMPANY_INFO.phone}</span>
+              <a href={`tel:${COMPANY_INFO.phone}`} className="brut-btn brut-btn--paper !py-4 !px-7 !text-sm">
+                <Phone className="w-5 h-5" />
+                Call {COMPANY_INFO.phone}
               </a>
-            </div>
+            </motion.div>
           </motion.div>
 
-          {/* Right Hero Visual */}
+          {/* ── Right: patient chart ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="lg:col-span-5 relative flex justify-center items-center py-8"
+            initial={{ opacity: 0, y: 40, rotate: 0 }}
+            animate={{ opacity: 1, y: 0, rotate: 1.5 }}
+            transition={{ duration: 0.55, delay: 0.25, ease: [0.7, 0, 0.2, 1] }}
+            className="lg:col-span-5 relative max-w-md w-full mx-auto lg:mx-0 lg:ml-auto"
           >
-            {/* Image Card */}
-            <div className="relative w-full max-w-sm lg:max-w-md">
+            {/* stickers */}
+            <div className="absolute -top-6 -right-3 sm:-right-6 z-20 rotate-6 animate-wiggle bg-sig-azure text-sig-navy border-[3px] border-sig-navy shadow-[4px_4px_0_0_#0a1f5c] px-3 py-1.5 font-mono text-sm font-bold">
+              24/7 ✚
+            </div>
+            <div className="absolute -bottom-5 -left-3 sm:-left-6 z-20 -rotate-3 bg-sig-cyan text-sig-navy border-[3px] border-sig-navy shadow-[4px_4px_0_0_#0a1f5c] px-3 py-1.5 font-mono text-xs font-bold uppercase flex items-center gap-1.5">
+              <ShieldCheck className="w-4 h-4" /> Background verified
+            </div>
 
-              {/* Image container — clips to rounded corners */}
-              <div className="relative w-full aspect-[3/4] rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+            <div className="brut-card overflow-hidden">
+              <div className="bg-sig-navy text-sig-sky font-mono text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 flex justify-between">
+                <span>Riya Medicare // Home care file</span>
+                <span>No. RM-247</span>
+              </div>
+
+              <div className="relative border-b-[3px] border-ink">
                 <img
                   src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?auto=format&fit=crop&w=800&q=80"
-                  alt="Professional Indian Home Nurse Caring for Patient"
-                  className="w-full h-full object-cover object-top"
+                  alt="Professional home nurse caring for a patient at home in Surat"
+                  width={800}
+                  height={1067}
+                  fetchPriority="high"
+                  className="w-full h-56 sm:h-64 object-cover object-top grayscale contrast-125 hover:grayscale-0 transition-all duration-300"
                 />
-                {/* Bottom gradient */}
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-900/70 via-brand-900/10 to-transparent" />
-                {/* Bottom label */}
-                <div className="absolute bottom-5 left-5 right-5 text-white">
-                  <span className="inline-block px-3 py-1 bg-cyan-500 text-xs font-bold rounded-full mb-1.5">
-                    Surat &amp; Ahmedabad
-                  </span>
-                  <p className="text-sm font-semibold text-white/90">
-                    Certified Male &amp; Female Caregivers
-                  </p>
+                <span className="absolute bottom-3 left-3 inline-flex items-center gap-1.5 bg-sig-sky text-sig-navy border-[3px] border-sig-navy px-2.5 py-1 font-mono text-xs font-bold uppercase">
+                  <MapPin className="w-3.5 h-3.5" /> Surat &amp; Ahmedabad
+                </span>
+              </div>
+
+              <dl className="font-mono text-xs">
+                {chartRows.map(([k, v]) => (
+                  <div key={k} className="grid grid-cols-[5.5rem_1fr] border-b-2 border-ink last:border-b-0">
+                    <dt className="px-3 py-2 font-bold uppercase bg-ink/10 border-r-2 border-ink">{k}</dt>
+                    <dd className="px-3 py-2 font-bold text-ink">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              {/* sample vitals */}
+              <div className="grid grid-cols-3 border-t-[3px] border-ink font-mono">
+                <div className="p-3 border-r-2 border-ink text-center">
+                  <HeartPulse className="w-5 h-5 mx-auto text-sig-azure animate-beat" strokeWidth={3} />
+                  <div className="text-lg font-bold leading-none mt-1">72</div>
+                  <div className="text-[10px] font-bold uppercase text-ink/60">BPM</div>
+                </div>
+                <div className="p-3 border-r-2 border-ink text-center">
+                  <div className="text-[10px] font-bold uppercase text-ink/60">SpO₂</div>
+                  <div className="text-lg font-bold leading-none mt-1">98%</div>
+                  <div className="text-[10px] font-bold uppercase text-ink/60">Oxygen</div>
+                </div>
+                <div className="p-2 flex items-center">
+                  <svg viewBox="0 0 120 50" className="w-full h-10 text-ink" aria-hidden="true">
+                    <path
+                      className="ecg-line"
+                      pathLength={1}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinejoin="miter"
+                      d="M0 28 H30 L38 28 L44 8 L52 46 L60 4 L66 30 L72 28 H120"
+                    />
+                  </svg>
                 </div>
               </div>
 
-              {/* Floating Card 1 — top left */}
-              <motion.div
-                animate={{ y: [0, -8, 0] }}
-                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                className="absolute -top-5 -left-5 sm:-left-8 bg-white/95 backdrop-blur-md p-3.5 rounded-2xl shadow-xl border border-slate-100 flex items-center space-x-3 z-20"
-              >
-                <div className="w-10 h-10 rounded-xl bg-brand-100 flex items-center justify-center">
-                  <Clock className="w-5 h-5 text-brand-700" />
+              <div className="border-t-[3px] border-ink px-4 pt-3 pb-2">
+                <div className="barcode" />
+                <div className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink/60 mt-1 text-center">
+                  Sample monitor · care plan set with your doctor
                 </div>
-                <div>
-                  <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Availability</p>
-                  <p className="text-sm font-extrabold text-brand-900">24/7 Home Care</p>
-                </div>
-              </motion.div>
-
-              {/* Floating Card 2 — bottom center */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-5 -right-5 sm:-right-8 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center space-x-3 z-20 whitespace-nowrap"
-              >
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                  <UserCheck className="w-5 h-5 text-emerald-600" />
-                </div>
-                <div>
-                  <p className="text-xs text-slate-500 font-semibold uppercase tracking-wider">Certified Staff</p>
-                  <p className="text-sm font-extrabold text-slate-900">Pro Nurses</p>
-                </div>
-              </motion.div>
-
+              </div>
             </div>
           </motion.div>
-
-
         </div>
       </div>
     </section>

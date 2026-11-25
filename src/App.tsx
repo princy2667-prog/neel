@@ -16,6 +16,8 @@ import FAQ from './components/FAQ';
 import FloatingActions from './components/FloatingActions';
 import Footer from './components/Footer';
 import BookingModal from './components/BookingModal';
+import ServiceMarquee from './components/ServiceMarquee';
+import SuratCoverage from './components/SuratCoverage';
 
 export default function App() {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -44,17 +46,24 @@ export default function App() {
     <ThemeProvider>
       <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 selection:bg-brand-700 selection:text-white transition-colors duration-300">
 
-
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[3000] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-brand-700 focus:text-white"
+      >
+        Skip to main content
+      </a>
 
       {/* Sticky Navigation Bar */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
       {/* Main Sections */}
-      <main>
+      <main id="main">
         <Hero onOpenBooking={handleOpenBooking} />
+        <ServiceMarquee />
         <Services onOpenBookingWithService={handleOpenBookingWithService} />
         <Procedures onOpenBookingWithProcedure={handleOpenBookingWithProcedure} />
         <TwentyFourSevenCare onOpenBooking={handleOpenBooking} />
+        <SuratCoverage onOpenBooking={handleOpenBooking} />
         <WhyChooseUs />
         <HowItWorks onOpenBooking={handleOpenBooking} />
         <CareCategories onOpenBooking={handleOpenBooking} />

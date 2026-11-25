@@ -11,6 +11,8 @@ export const COMPANY_INFO = {
   state: "Gujarat, India",
   managingDirector: "Neel Rathod",
   accountant: "Rajveer Rathod",
+  primaryCity: "Surat",
+  siteUrl: "https://riyamedicare.in",
   logoUrl: "/assets/riya-medicare-logo.png",
   symbolUrl: "/assets/riya-medicare-symbol.png",
 };
@@ -19,7 +21,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "home-nursing",
     title: "Home Nursing Service",
-    shortDesc: "24/7 skilled nursing care at home by registered male and female nurses.",
+    shortDesc: "24/7 skilled home nursing in Surat by qualified male and female nurses.",
     fullDesc: "Our home nursing service brings ICU-experienced nurses to your doorstep for post-surgical care, vital tracking, IV drip therapy, medication management, and daily clinical monitoring.",
     iconName: "HeartPulse",
     badge: "24/7 Available",
@@ -33,7 +35,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "elderly-care",
     title: "Elderly Care",
-    shortDesc: "Compassionate full-time and part-time assistance for senior citizens.",
+    shortDesc: "Compassionate full-time and part-time elderly care at home in Surat.",
     fullDesc: "Dedicated geriatric caregivers who assist with daily hygiene, assisted walking, medication reminders, meal support, and gentle emotional companionship for elderly family members.",
     iconName: "UserCheck",
     badge: "Most Requested",
@@ -47,7 +49,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "icu-care",
     title: "ICU Care At Home",
-    shortDesc: "Advanced critical care setup with ventilator & monitoring trained nurses.",
+    shortDesc: "Hospital-grade ICU setup at home in Surat with ventilator-trained nurses.",
     fullDesc: "Hospital-grade intensive care setup at home. Equipped with ventilator support, tracheostomy care, continuous ECG monitoring, and round-the-clock critical nursing supervision.",
     iconName: "Activity",
     badge: "Critical Support",
@@ -61,7 +63,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "baby-care",
     title: "Baby Care & Mother Care",
-    shortDesc: "Newborn care, mother post-delivery guidance, and pediatric support.",
+    shortDesc: "Newborn care and mother post-delivery support at home in Surat.",
     fullDesc: "Specialized newborn caregivers and pediatric nurses helping mothers with post-natal recovery, baby massage, feeding support, hygiene, and infant sleep routine stabilization.",
     iconName: "Baby",
     badge: "Specialized Care",
@@ -75,7 +77,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "dementia-care",
     title: "Dementia Care",
-    shortDesc: "Gentle memory care for patients managing Alzheimer's & cognitive decline.",
+    shortDesc: "Gentle dementia and Alzheimer's memory care at home in Surat.",
     fullDesc: "Specially trained memory care assistants providing a calm, safe environment, cognitive exercises, behavioral reassurance, and structured daily routines for dementia patients.",
     iconName: "Brain",
     badge: "Specialist Care",
@@ -89,7 +91,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "post-hospital-care",
     title: "Post-Hospital Care",
-    shortDesc: "Accelerated recovery at home following hospital discharge & surgery.",
+    shortDesc: "Post-operative and post-discharge patient care at home in Surat.",
     fullDesc: "Smooth transition from hospital to home care. Reduces hospital readmission rates through surgical wound dressing, catheter management, pain relief, and rehab exercises.",
     iconName: "Stethoscope",
     badge: "Fast Recovery",
@@ -103,7 +105,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "disability-care",
     title: "Disability Care",
-    shortDesc: "Empowering personal caretaker support for physically challenged individuals.",
+    shortDesc: "Dedicated caretakers for paralysis and physically challenged patients in Surat.",
     fullDesc: "Tailored assistance for individuals living with spinal injury, stroke paralysis, or mobility impairment to maintain independence, dignity, and personal hygiene.",
     iconName: "Accessibility",
     badge: "Dedicated Aid",
@@ -117,7 +119,7 @@ export const SERVICES_DATA: ServiceItem[] = [
   {
     id: "cancer-care",
     title: "Specialized Cancer Care",
-    shortDesc: "Empathic oncology nursing care, chemo side-effect care & palliative support.",
+    shortDesc: "Oncology nursing, chemo side-effect care and palliative support at home in Surat.",
     fullDesc: "Palliative oncology homecare focused on chemo recovery, PICC line care, pain protocol management, hydration therapy, and compassionate emotional support for patient & family.",
     iconName: "ShieldAlert",
     badge: "Oncology Care",
@@ -264,46 +266,93 @@ export const CARE_CATEGORIES_DATA: CareCategoryItem[] = [
   }
 ];
 
+export const SURAT_AREAS = [
+  "Adajan", "Vesu", "Piplod", "Althan", "Athwa", "City Light",
+  "Ghod Dod Road", "Parle Point", "Udhna", "Varachha", "Katargam", "Rander",
+  "Pal", "Pandesara", "Sachin", "Dumas Road", "Limbayat", "Nanpura",
+  "Majura Gate", "Bhatar", "Yogi Chowk"
+];
+
+/** Visible "popular searches" shown to visitors — real phrases people type into Google. */
+export const SURAT_SEARCH_PHRASES = [
+  "Best home nursing service in Surat",
+  "24 hour caretaker in Surat",
+  "Nurse at home in Surat",
+  "Male & female nurse in Surat",
+  "ICU setup at home in Surat",
+  "Elderly care at home in Surat",
+  "Post-operative patient care in Surat",
+  "Baby care & mother care in Surat",
+  "Physiotherapy at home in Surat",
+  "Paralysis patient care in Surat",
+  "Cancer & palliative care at home Surat",
+  "Dementia care in Surat",
+  "Blood sample collection at home Surat",
+  "Injection & dressing at home Surat",
+  "Doctor visit at home in Surat",
+  "Best home healthcare in Surat",
+];
+
 export const FAQS_DATA: FaqItem[] = [
   {
     id: "faq-1",
-    question: "What home nursing services do you provide?",
-    answer: "We provide comprehensive 24/7 home healthcare including full-time home nursing, 24-hour caretakers, ICU setup at home, elderly care, baby care, post-hospital recovery, cancer care, dementia support, injection administration, surgical dressing, catheter care, and blood sample collection."
+    question: "Which is the best home nursing service in Surat?",
+    answer: "Riya Medicare provides 24/7 home nursing and caretaker services across Surat with qualified male and female nurses, ICU setup at home, elderly care, baby care and post-hospital recovery. Call +91 7567425627 to discuss your family's needs and meet the right care professional."
   },
   {
     id: "faq-2",
-    question: "Are your services available 24 hours?",
-    answer: "Yes! Riya Medicare operates 24 hours a day, 7 days a week. We offer 12-hour day shifts, 12-hour night shifts, 24-hour live-in caretakers/nurses, as well as on-demand procedure visits in Surat and Ahmedabad."
+    question: "What home nursing services do you provide in Surat?",
+    answer: "We provide full-time home nursing, 24-hour caretakers, ICU care at home, elderly care, baby and mother care, post-hospital recovery, cancer and palliative care, dementia support, injections, surgical dressing, catheter care, physiotherapy and blood sample collection at your doorstep."
   },
   {
     id: "faq-3",
-    question: "Do you provide elderly care?",
-    answer: "Yes, elderly care is one of our primary services. Our trained caregivers assist senior citizens with personal hygiene, bathing, assisted mobility, feeding, medication schedules, and warm companionship."
+    question: "Are your services available 24 hours in Surat?",
+    answer: "Yes. Riya Medicare operates 24 hours a day, 7 days a week. We offer 12-hour day shifts, 12-hour night shifts and 24-hour live-in caretakers or nurses, plus on-demand procedure visits in Surat and Ahmedabad."
   },
   {
     id: "faq-4",
-    question: "Do you provide post-hospital care?",
-    answer: "Yes. We assist post-surgery and post-discharge patients with wound dressings, IV/IM medication administration, vital monitoring, mobility assistance, and doctor-aligned recovery plans at home."
+    question: "Which areas of Surat do you serve?",
+    answer: "We serve patients across Surat including Adajan, Vesu, Piplod, Althan, Athwa, City Light, Varachha, Katargam, Rander, Pal, Udhna, Limbayat and nearby localities. If your area is not listed, call us and we will confirm availability."
   },
   {
     id: "faq-5",
-    question: "Can I request a female or male nurse specifically?",
-    answer: "Yes. We respect patient comfort and privacy. We provide certified Female Nurses (F) and Male Nurses (M) based on your family's request."
+    question: "Do you provide elderly care at home in Surat?",
+    answer: "Yes, elderly care is one of our primary services. Trained caregivers assist senior citizens with personal hygiene, bathing, assisted mobility, feeding, medication schedules and warm companionship."
   },
   {
     id: "faq-6",
-    question: "Do you provide ICU care at home?",
-    answer: "Yes. We set up hospital-standard ICU care units at home equipped with trained ICU nurses, ventilator tracking, oxygen management, suctioning, and tracheostomy care."
+    question: "Do you provide post-hospital and post-operative care?",
+    answer: "Yes. We support post-surgery and post-discharge patients with wound dressings, IV/IM medication administration, vital monitoring, mobility assistance and doctor-aligned recovery plans at home."
   },
   {
     id: "faq-7",
-    question: "Do you provide physiotherapy services?",
-    answer: "Yes. We offer doorstep physiotherapy sessions for stroke rehabilitation, orthopedic post-surgery rehab, joint mobility, and chronic pain management."
+    question: "Can I request a female or male nurse specifically?",
+    answer: "Yes. We respect patient comfort and privacy. We provide certified female nurses and male nurses based on your family's request."
   },
   {
     id: "faq-8",
-    question: "Which cities do you currently serve?",
-    answer: "We currently provide home nursing and caretaker services in Surat and Ahmedabad, Gujarat, India, with rapid emergency deployment capabilities."
+    question: "Do you provide ICU care at home in Surat?",
+    answer: "Yes. We set up hospital-standard ICU care at home with trained ICU nurses, ventilator tracking, oxygen management, suctioning and tracheostomy care, working alongside your treating doctor."
+  },
+  {
+    id: "faq-9",
+    question: "Do you provide physiotherapy at home?",
+    answer: "Yes. We offer doorstep physiotherapy sessions for stroke rehabilitation, orthopedic post-surgery rehab, joint mobility and chronic pain management."
+  },
+  {
+    id: "faq-10",
+    question: "How much does a home nurse or caretaker cost in Surat?",
+    answer: "Charges depend on the type of care (nurse or caretaker), shift length (12 or 24 hours) and the patient's condition. Call +91 7567425627 or send a request and our coordinator will share a clear quote before care begins."
+  },
+  {
+    id: "faq-11",
+    question: "How quickly can a nurse or caretaker start?",
+    answer: "Contact us with the patient's condition, location and shift requirement. We will match a suitable professional and confirm the earliest start time with you, including urgent requirements."
+  },
+  {
+    id: "faq-12",
+    question: "Do you also serve Ahmedabad?",
+    answer: "Yes. Along with Surat, we provide home nursing and caretaker services in Ahmedabad, Gujarat."
   }
 ];
 
@@ -311,7 +360,7 @@ export const HOW_IT_WORKS_STEPS = [
   {
     step: "01",
     title: "Contact Us",
-    description: "Call 7567425627 or request care through our website to speak with our homecare coordinators."
+    description: "Call 7567425627 or request care through our website to speak with our Surat homecare coordinators."
   },
   {
     step: "02",
@@ -326,6 +375,6 @@ export const HOW_IT_WORKS_STEPS = [
   {
     step: "04",
     title: "Start Care At Home",
-    description: "Our staff arrives at your doorstep to deliver compassionate, professional healthcare."
+    description: "Our staff arrives at your doorstep in Surat to deliver compassionate, professional healthcare."
   }
 ];

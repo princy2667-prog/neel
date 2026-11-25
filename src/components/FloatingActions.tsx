@@ -1,17 +1,29 @@
 import React from 'react';
+import { Phone } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
 
 export default function FloatingActions() {
-  const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent('Hello Riya Medicare, I need 24/7 Home Nursing / Caregiver details.')}`;
+  const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent('Hello Riya Medicare, I need 24/7 home nursing / caretaker details in Surat.')}`;
 
   return (
-    <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-[999] pointer-events-auto">
+    <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-[999] pointer-events-auto flex flex-col items-end gap-3">
+      <a
+        href={`tel:${COMPANY_INFO.phone}`}
+        aria-label="Call Riya Medicare"
+        className="group relative flex items-center justify-center w-14 h-14 bg-sig-sky text-sig-navy border-[3px] border-sig-navy shadow-[5px_5px_0_0_#0a1f5c] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_0_#0a1f5c] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-100"
+      >
+        <Phone className="w-6 h-6" strokeWidth={3} />
+        <span className="absolute right-16 bg-sig-navy text-sig-sky font-mono text-[11px] font-bold uppercase px-3 py-1.5 border-2 border-sig-sky whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden sm:block">
+          Call {COMPANY_INFO.phone}
+        </span>
+      </a>
+
       <a
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact Riya Medicare on WhatsApp"
-        className="group relative flex items-center justify-center w-14 h-14 rounded-2xl hover:scale-110 transition-all duration-300 shadow-lg shadow-green-500/40"
+        className="group relative flex items-center justify-center w-14 h-14 border-[3px] border-sig-navy shadow-[5px_5px_0_0_#0a1f5c] hover:-translate-x-0.5 hover:-translate-y-0.5 hover:shadow-[7px_7px_0_0_#0a1f5c] active:translate-x-1 active:translate-y-1 active:shadow-none transition-all duration-100"
         style={{ backgroundColor: '#25D366' }}
       >
         {/* Official WhatsApp Icon SVG */}
@@ -42,12 +54,12 @@ export default function FloatingActions() {
 
         {/* Pulse ring */}
         <span
-          className="absolute inset-0 rounded-2xl animate-ping opacity-20"
+          className="absolute inset-0 animate-ping opacity-20 pointer-events-none"
           style={{ backgroundColor: '#25D366' }}
         />
 
         {/* Tooltip — desktop only */}
-        <span className="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg shadow-md whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden sm:block">
+        <span className="absolute right-16 bg-sig-navy text-sig-sky font-mono text-[11px] font-bold uppercase px-3 py-1.5 border-2 border-sig-sky whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden sm:block">
           WhatsApp Support 24/7
         </span>
       </a>

@@ -1,58 +1,58 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Phone, MessageSquareHeart, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Phone, MessageSquareHeart, ShieldCheck } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
 
 export default function EmergencyCTA() {
-  const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent('Hello Riya Medicare, I need 24/7 Home Nursing / Caretaker assistance.')}`;
+  const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent('Hello Riya Medicare, I need 24/7 Home Nursing / Caretaker assistance in Surat.')}`;
 
   return (
-    <section className="py-20 lg:py-24 bg-gradient-to-r from-brand-900 via-brand-800 to-brand-700 text-white relative overflow-hidden">
-      {/* Background Subtle Wave */}
-      <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#00a8ff_1px,transparent_1px)] [background-size:16px_16px]" />
+    <section className="on-signal bg-sig-azure border-b-[3px] border-ink relative overflow-hidden">
+      <div className="hazard !border-x-0 !border-t-0" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <div className="max-w-3xl mx-auto">
-          
-          {/* Animated Call Pulse Icon */}
-          <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full bg-cyan-500 text-white mb-8 shadow-2xl shadow-cyan-500/40">
-            <div className="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-50" />
-            <Phone className="w-9 h-9 relative z-10 animate-bounce" />
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, ease: [0.7, 0, 0.2, 1] }}
+            className="lg:col-span-8"
+          >
+            <span className="inline-flex items-center gap-2 bg-sig-navy text-sig-sky font-mono text-xs font-bold uppercase px-3 py-1.5 mb-6">
+              <span className="w-2.5 h-2.5 bg-sig-azure animate-blink" /> Emergency line · 24 hours
+            </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight mb-6">
-            Need Professional Care At Home?
-          </h2>
+            <h2 className="text-5xl sm:text-6xl lg:text-8xl font-bold mb-6 text-sig-navy">
+              Need professional care at home?
+            </h2>
 
-          <p className="text-lg sm:text-xl text-slate-200 font-normal leading-relaxed mb-10">
-            Our team is ready to understand your needs and help you find the right care solution in Surat & Ahmedabad.
-          </p>
+            <p className="text-base sm:text-xl font-medium max-w-2xl leading-relaxed">
+              Our team is ready to understand your needs and help you find the right home nursing or caretaker
+              solution in Surat &amp; Ahmedabad.
+            </p>
+          </motion.div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <a
-              href={`tel:${COMPANY_INFO.phone}`}
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-9 py-4 rounded-full bg-white text-brand-900 font-extrabold text-lg hover:bg-slate-100 hover:shadow-2xl hover:scale-105 transition-all"
-            >
-              <Phone className="w-5 h-5 text-brand-700" />
-              <span>Call Now: {COMPANY_INFO.phone}</span>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.45, delay: 0.1, ease: [0.7, 0, 0.2, 1] }}
+            className="lg:col-span-4 grid gap-4"
+          >
+            <a href={`tel:${COMPANY_INFO.phone}`} className="brut-btn brut-btn--ink !py-5 !text-base">
+              <Phone className="w-6 h-6 animate-beat" strokeWidth={3} />
+              Call now: {COMPANY_INFO.phone}
             </a>
-
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full sm:w-auto inline-flex items-center justify-center space-x-3 px-9 py-4 rounded-full bg-emerald-500 text-white font-extrabold text-lg hover:bg-emerald-600 hover:shadow-2xl hover:scale-105 transition-all"
-            >
-              <MessageSquareHeart className="w-5 h-5" />
-              <span>WhatsApp Us</span>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="brut-btn brut-btn--cyan !py-5 !text-base">
+              <MessageSquareHeart className="w-6 h-6" strokeWidth={3} />
+              WhatsApp us
             </a>
-          </div>
-
-          <div className="mt-8 flex items-center justify-center space-x-2 text-xs font-semibold text-cyan-300">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
-            <span>Serving Surat & Ahmedabad | 24 Hours Emergency Response</span>
-          </div>
-
+            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase">
+              <ShieldCheck className="w-4 h-4" strokeWidth={3} />
+              Home nursing in Surat &amp; Ahmedabad
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

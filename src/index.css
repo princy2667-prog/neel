@@ -2,26 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --color-brand-deep: #072856;
-    --color-brand-main: #0B3C7D;
-    --color-brand-cyan: #00A8FF;
-  }
+/* ═══════════════════════════════════════════════════════════════
+   RIYA MEDICARE — MEDICAL BRUTALIST DESIGN SYSTEM
+   Raw type · thick ink borders · hard offset shadows · clinical
+   signal colours (azure, sky, cyan on clean white).
+═══════════════════════════════════════════════════════════════ */
+:root {
+  --paper: #eef4ff;
+  --surface: #ffffff;
+  --ink: #0a1f5c;
+  --paper-rgb: 238 244 255;
+  --surface-rgb: 255 255 255;
+  --ink-rgb: 10 31 92;
+  --azure: #3b82f6;
+  --sky: #93c5fd;
+  --cyan: #4fd1ff;
+  --royal: #1d4ed8;
+}
 
+.dark {
+  --paper: #0a1c52;
+  --surface: #112a75;
+  --ink: #eaf2ff;
+  --paper-rgb: 10 28 82;
+  --surface-rgb: 17 42 117;
+  --ink-rgb: 234 242 255;
+}
+
+@layer base {
   html {
     scroll-behavior: smooth;
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 antialiased overflow-x-hidden;
+    @apply antialiased overflow-x-hidden;
+    background-color: var(--paper);
+    color: var(--ink);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    letter-spacing: -0.02em;
+  }
+
+  h1, h2 {
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
+    line-height: 0.98;
+  }
+
+  ::selection {
+    background: var(--sky);
+    color: #0a1f5c;
   }
 }
+
+/* Chunky scrollbar */
+::-webkit-scrollbar { width: 14px; height: 14px; }
+::-webkit-scrollbar-track { background: var(--paper); border-left: 3px solid var(--ink); }
+::-webkit-scrollbar-thumb { background: var(--ink); border: 3px solid var(--paper); }
 
 /* Reduced Motion Override for Accessibility */
 @media (prefers-reduced-motion: reduce) {
@@ -31,35 +71,192 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .custom-cursor {
-    display: none !important;
-  }
+  .custom-cursor { display: none !important; }
 }
 
-
-/* Custom Utility Classes */
-.glass-card {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
+:focus-visible {
+  outline: 4px solid var(--azure);
+  outline-offset: 3px;
 }
 
-.glass-card-dark {
-  background: rgba(7, 40, 86, 0.92);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+/* Re-scope the theme tokens inside a section, so every brutalist
+   component placed in it adapts automatically. */
+.on-dark {
+  --paper: #1d4ed8;
+  --surface: #1a43bd;
+  --ink: #eaf2ff;
+  --paper-rgb: 29 78 216;
+  --surface-rgb: 26 67 189;
+  --ink-rgb: 234 242 255;
+  background-color: #1d4ed8;
+  color: #ffffff;
+}
+.on-signal {
+  --paper: #eef4ff;
+  --surface: #ffffff;
+  --ink: #0a1f5c;
+  --paper-rgb: 238 244 255;
+  --surface-rgb: 255 255 255;
+  --ink-rgb: 10 31 92;
+  color: #0a1f5c;
 }
 
-.text-gradient {
-  background: linear-gradient(135deg, #0B3C7D 0%, #00A8FF 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+@layer components {
+/* ── Core brutalist building blocks ───────────────────────────── */
+.brut-card {
+  background: var(--surface);
+  border: 3px solid var(--ink);
+  box-shadow: 6px 6px 0 0 var(--ink);
+  transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background-color 0.14s;
+}
+.brut-card-hover:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0 0 var(--ink);
 }
 
+.brut-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.95rem 1.5rem;
+  background: var(--sky);
+  color: #0a1f5c;
+  border: 3px solid var(--ink);
+  box-shadow: 5px 5px 0 0 var(--ink);
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.1s;
+}
+.brut-btn:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 0 var(--ink); }
+.brut-btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 0 var(--ink); }
+.brut-btn--azure { background: var(--azure); }
+.brut-btn--cyan { background: var(--cyan); }
+.brut-btn--paper { background: var(--surface); color: var(--ink); }
+.brut-btn--ink { background: var(--ink); color: var(--paper); box-shadow: 5px 5px 0 0 var(--sky); }
+.brut-btn--ink:hover { box-shadow: 7px 7px 0 0 var(--sky); }
+
+/* Mono label chip — e.g. "[ 01 / SERVICES ]" */
+.brut-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.6rem;
+  border: 2px solid var(--ink);
+  font-family: 'Space Mono', ui-monospace, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.font-mono { font-family: 'Space Mono', ui-monospace, monospace; }
+}
+
+/* Highlighter marker — replaces the old gradient text */
+.text-gradient,
 .text-gradient-cyan {
-  background: linear-gradient(135deg, #00A8FF 0%, #38BDF8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: var(--sky);
+  color: #0a1f5c;
+  -webkit-text-fill-color: #0a1f5c;
+  padding: 0 0.18em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
+
+/* ── Medical motifs ───────────────────────────────────────────── */
+/* ECG graph paper */
+.ecg-paper {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.28) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.28) 2px, transparent 2px),
+    linear-gradient(rgba(37, 99, 235, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.12) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
+}
+.dark .ecg-paper {
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.22) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.22) 2px, transparent 2px),
+    linear-gradient(rgba(37, 99, 235, 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.09) 1px, transparent 1px);
+}
+
+/* Caution-tape stripe */
+.hazard {
+  height: 18px;
+  background: repeating-linear-gradient(-45deg, #0a1f5c 0 16px, #93c5fd 16px 32px);
+  border-block: 3px solid #0a1f5c;
+}
+
+/* Barcode strip for the patient-chart card */
+.barcode {
+  height: 38px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--ink) 0 2px, transparent 2px 5px,
+    var(--ink) 5px 6px, transparent 6px 9px,
+    var(--ink) 9px 12px, transparent 12px 14px,
+    var(--ink) 14px 15px, transparent 15px 19px
+  );
+}
+
+/* Dotted halftone texture for dark blocks */
+.halftone {
+  background-image: radial-gradient(rgba(234, 242, 255, 0.14) 1.5px, transparent 1.5px);
+  background-size: 14px 14px;
+}
+
+.ecg-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ecg 4.5s steps(60, end) infinite;
+}
+
+/* Blobs / soft glows don't exist in brutalism */
+.blur-3xl, .blur-2xl { display: none !important; }
+
+/* ── Legacy utility remaps (older components) ─────────────────── */
+.bg-white { background-color: var(--surface); }
+.bg-slate-50 { background-color: var(--paper); }
+.bg-slate-100 { background-color: color-mix(in srgb, var(--ink) 8%, var(--paper)); }
+.bg-slate-900 { background-color: #1d4ed8; }
+.bg-brand-50, .bg-cyan-50 { background-color: var(--surface); }
+.bg-brand-100 { background-color: var(--sky); color: #0a1f5c; }
+
+.text-slate-900, .text-brand-900, .text-brand-800, .text-brand-700 { color: var(--ink); }
+.text-slate-700 { color: color-mix(in srgb, var(--ink) 88%, transparent); }
+.text-slate-600 { color: color-mix(in srgb, var(--ink) 78%, transparent); }
+.text-slate-500, .text-slate-400 { color: color-mix(in srgb, var(--ink) 62%, transparent); }
+.text-cyan-700, .text-cyan-600 { color: var(--ink); }
+
+[class*="border-slate-"],
+[class*="border-brand-"],
+[class*="border-cyan-"] { border-color: var(--ink); }
+
+/* Hover colours that used to be soft tints */
+.hover\:bg-white:hover, .hover\:bg-slate-50:hover, .hover\:bg-brand-50:hover { background-color: var(--sky); color: #0a1f5c; }
+
+/* Forms */
+input, select, textarea {
+  background-color: var(--surface);
+  color: var(--ink);
+  border: 3px solid var(--ink) !important;
+  border-radius: 0 !important;
+  font-family: 'Space Mono', ui-monospace, monospace;
+}
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  box-shadow: 5px 5px 0 0 var(--azure);
+  background-color: var(--surface);
+}
+input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--ink) 50%, transparent); }
+select option, select optgroup { background-color: var(--surface); color: var(--ink); }

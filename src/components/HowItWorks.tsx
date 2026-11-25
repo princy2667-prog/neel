@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { PhoneCall, ClipboardCheck, UserCheck, Home, ArrowRight } from 'lucide-react';
+import { PhoneCall, ClipboardCheck, UserCheck, Home, ArrowRight, ListOrdered } from 'lucide-react';
 import { HOW_IT_WORKS_STEPS } from '../data/medicareData';
+import SectionHeading from './SectionHeading';
 
 const stepIcons = [PhoneCall, ClipboardCheck, UserCheck, Home];
+const stepAccents = ['bg-sig-sky', 'bg-sig-cyan', 'bg-sig-azure', 'bg-sig-white'];
 
 interface HowItWorksProps {
   onOpenBooking: () => void;
@@ -11,76 +13,70 @@ interface HowItWorksProps {
 
 export default function HowItWorks({ onOpenBooking }: HowItWorksProps) {
   return (
-    <section className="py-20 lg:py-28 bg-white relative">
+    <section className="py-20 lg:py-28 bg-surface border-b-[3px] border-ink relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <span className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-cyan-50 text-cyan-700 text-xs font-bold uppercase tracking-wider mb-4 border border-cyan-200">
-            <span>Simple 4-Step Process</span>
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-brand-900 tracking-tight mb-4">
-            How It Works
-          </h2>
-          <p className="text-lg text-slate-600 font-normal">
-            Getting professional healthcare at home is quick, seamless, and tailored to your family's needs.
-          </p>
-        </div>
+        <SectionHeading
+          index="05"
+          icon={ListOrdered}
+          eyebrow="Simple 4-step process"
+          title="How to Book a Home Nurse"
+          highlight="in Surat"
+          subtitle="Getting professional healthcare at home is quick, seamless, and tailored to your family's needs."
+        />
 
-        {/* 4 Steps Timeline Container */}
-        <div className="relative">
-          {/* Connecting Line (Desktop) */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-brand-700 via-cyan-400 to-emerald-400 -translate-y-1/2 z-0" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+          {HOW_IT_WORKS_STEPS.map((item, idx) => {
+            const IconComponent = stepIcons[idx] || Home;
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-            {HOW_IT_WORKS_STEPS.map((item, idx) => {
-              const IconComponent = stepIcons[idx] || Home;
+            return (
+              <motion.div
+                key={item.step}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: idx * 0.1, ease: [0.7, 0, 0.2, 1] }}
+                className="relative brut-card brut-card-hover flex flex-col"
+              >
+                <div className="bg-sig-navy text-sig-sky font-mono text-[11px] font-bold uppercase px-4 py-2 flex justify-between">
+                  <span>Step {idx + 1} / 4</span>
+                  <span>▶</span>
+                </div>
 
-              return (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: idx * 0.15 }}
-                  className="bg-white p-7 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:border-cyan-400 transition-all duration-300 flex flex-col justify-between"
-                >
-                  <div>
-                    {/* Step Number & Icon */}
-                    <div className="flex items-center justify-between mb-6">
-                      <span className="text-3xl font-extrabold text-brand-700 tracking-tight">
-                        {item.step}
-                      </span>
-                      
-                      <div className="w-12 h-12 rounded-2xl bg-brand-50 text-brand-700 flex items-center justify-center border border-brand-100">
-                        <IconComponent className="w-6 h-6 text-brand-700" />
-                      </div>
-                    </div>
-
-                    <h3 className="text-xl font-bold text-brand-900 mb-3">
-                      {item.title}
-                    </h3>
-
-                    <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                      {item.description}
-                    </p>
+                <div className="p-6 flex-1 flex flex-col">
+                  <div className="flex items-start justify-between mb-5">
+                    <span
+                      className="text-7xl font-bold leading-none text-transparent"
+                      style={{ WebkitTextStroke: '3px var(--ink)' }}
+                    >
+                      {item.step}
+                    </span>
+                    <span className={`${stepAccents[idx]} grid place-items-center w-12 h-12 border-[3px] border-ink text-sig-navy`}>
+                      <IconComponent className="w-6 h-6" strokeWidth={2.5} />
+                    </span>
                   </div>
 
+                  <h3 className="text-xl font-bold uppercase leading-tight mb-2">{item.title}</h3>
+                  <p className="text-sm text-ink/75 leading-relaxed">{item.description}</p>
+
                   {idx === 0 && (
-                    <button
-                      onClick={onOpenBooking}
-                      className="inline-flex items-center space-x-1.5 text-xs font-bold text-cyan-600 hover:text-brand-700 pt-3 border-t border-slate-100"
-                    >
-                      <span>Start Inquiry</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                    <button onClick={onOpenBooking} className="brut-btn brut-btn--azure mt-6 !py-2.5 !text-xs self-start">
+                      Start inquiry <ArrowRight className="w-4 h-4" strokeWidth={3} />
                     </button>
                   )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
+                </div>
 
+                {idx < HOW_IT_WORKS_STEPS.length - 1 && (
+                  <span
+                    aria-hidden="true"
+                    className="hidden lg:grid absolute top-1/2 -right-6 z-10 -translate-y-1/2 w-6 h-10 place-items-center bg-sig-azure border-y-[3px] border-r-[3px] border-sig-navy text-sig-navy font-bold"
+                  >
+                    ›
+                  </span>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

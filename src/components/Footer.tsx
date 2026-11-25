@@ -1,149 +1,128 @@
 import React from 'react';
-import { Phone, Mail, MapPin, Heart, Sparkles, Sun, Moon } from 'lucide-react';
-import { COMPANY_INFO, SERVICES_DATA } from '../data/medicareData';
+import { Phone, Mail, MapPin, Sun, Moon, ArrowUp } from 'lucide-react';
+import { COMPANY_INFO, SERVICES_DATA, SURAT_AREAS } from '../data/medicareData';
 import { useTheme } from '../context/ThemeContext';
+
+const quickLinks = [
+  ['Home', '#home'],
+  ['Services', '#services'],
+  ['Procedures', '#procedures'],
+  ['Surat Areas', '#areas'],
+  ['About Us', '#about'],
+  ['Why Choose Us', '#why-us'],
+  ['FAQ', '#faq'],
+  ['Contact', '#contact'],
+];
+
+const linkClass = 'font-mono text-sm uppercase text-sig-white/80 hover:text-sig-sky hover:translate-x-1 inline-block transition-all';
 
 export default function Footer() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <footer className="relative bg-brand-900 text-slate-100 dark:bg-brand-950 dark:text-slate-200 pt-16 pb-24 lg:pb-12 border-t border-brand-800/80 dark:border-slate-800 transition-colors duration-300">
-      {/* Top Accent Gradient Bar */}
-      <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-500 via-brand-500 to-emerald-400" />
+    <footer className="on-dark halftone relative pb-24 lg:pb-12">
+      <div className="hazard !border-x-0 !border-t-0" />
 
-      {/* Decorative Subtle Background Glow */}
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute top-0 left-0 w-80 h-80 bg-brand-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14">
+        {/* Giant wordmark */}
+        <div className="border-b-[3px] border-sig-white pb-8 mb-10">
+          <div className="font-mono text-xs font-bold uppercase text-sig-cyan mb-3 flex items-center gap-2">
+            <span className="w-2.5 h-2.5 bg-sig-white animate-blink" /> Home nursing service · Surat &amp; Ahmedabad
+          </div>
+          <div className="text-[clamp(2.75rem,11vw,9rem)] font-bold uppercase leading-[0.85] tracking-tighter text-sig-white">
+            Riya <span className="text-sig-sky">Medi</span>care<span className="text-sig-cyan">✚</span>
+          </div>
+        </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-          
-          {/* Col 1 & 2: Branding */}
-          <div className="lg:col-span-2 space-y-5">
-            <a href="#home" className="inline-block group">
-              <div className="bg-white/95 p-2 rounded-xl inline-block shadow-md backdrop-blur-sm border border-white/20 transition-transform group-hover:scale-105">
-                <img
-                  src={COMPANY_INFO.logoUrl}
-                  alt="RIYA MEDICARE"
-                  className="h-11 w-auto object-contain"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = COMPANY_INFO.symbolUrl;
-                  }}
-                />
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12">
+          <div className="lg:col-span-4 space-y-5">
+            <a href="#home" className="inline-block bg-sig-white border-[3px] border-sig-white p-2 shadow-[5px_5px_0_0_#93c5fd]">
+              <img
+                src={COMPANY_INFO.logoUrl}
+                alt="Riya Medicare"
+                className="h-11 w-auto object-contain"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = COMPANY_INFO.symbolUrl;
+                }}
+              />
             </a>
 
-            <p className="text-sm text-slate-300 dark:text-slate-400 max-w-sm leading-relaxed italic">
-              "Service at your doorstep. Extraordinary people.... Extraordinary Care....!"
+            <p className="border-l-[6px] border-sig-azure pl-4 text-sm text-sig-white/80 leading-relaxed italic">
+              "Service at your doorstep. Extraordinary people… Extraordinary care…!"
             </p>
 
-            <div className="text-xs text-slate-300 dark:text-slate-400 space-y-1.5 pt-1">
-              <div><strong className="text-white dark:text-slate-200 font-semibold">Managing Director:</strong> {COMPANY_INFO.managingDirector}</div>
-              <div><strong className="text-white dark:text-slate-200 font-semibold">Chief Accountant:</strong> {COMPANY_INFO.accountant}</div>
-              <div className="text-cyan-400 font-semibold pt-1 flex items-center space-x-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
-                <span>Serving Surat & Ahmedabad @ 24 Hours</span>
-              </div>
+            <div className="font-mono text-xs text-sig-white/80 space-y-1.5">
+              <div><strong className="text-sig-sky">Managing Director:</strong> {COMPANY_INFO.managingDirector}</div>
+              <div><strong className="text-sig-sky">Chief Accountant:</strong> {COMPANY_INFO.accountant}</div>
             </div>
 
-            {/* Quick Theme Switcher Pill in Footer */}
-            <div className="pt-2">
-              <button
-                onClick={toggleTheme}
-                className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-brand-800/80 dark:bg-slate-800/80 border border-brand-700/60 dark:border-slate-700 text-xs font-medium text-slate-200 hover:text-white transition-all shadow-sm"
-              >
-                {theme === 'dark' ? (
-                  <>
-                    <Sun className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Switch to Light Theme</span>
-                  </>
-                ) : (
-                  <>
-                    <Moon className="w-3.5 h-3.5 text-cyan-400" />
-                    <span>Switch to Dark Theme</span>
-                  </>
-                )}
-              </button>
-            </div>
+            <button onClick={toggleTheme} className="brut-btn brut-btn--paper !py-2 !px-3 !text-[11px]">
+              {theme === 'dark' ? <Sun className="w-4 h-4" strokeWidth={3} /> : <Moon className="w-4 h-4" strokeWidth={3} />}
+              {theme === 'dark' ? 'Light theme' : 'Dark theme'}
+            </button>
           </div>
 
-          {/* Col 3: Quick Links */}
-          <div>
-            <h4 className="text-white font-bold text-base mb-4 border-b border-brand-700/70 dark:border-slate-800 pb-2">
-              Quick Links
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              <li><a href="#home" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors inline-flex items-center space-x-1"><span>Home</span></a></li>
-              <li><a href="#services" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors inline-flex items-center space-x-1"><span>Services</span></a></li>
-              <li><a href="#procedures" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors inline-flex items-center space-x-1"><span>Procedures</span></a></li>
-              <li><a href="#about" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors inline-flex items-center space-x-1"><span>About Us</span></a></li>
-              <li><a href="#why-us" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors inline-flex items-center space-x-1"><span>Why Choose Us</span></a></li>
-              <li><a href="#faq" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors inline-flex items-center space-x-1"><span>FAQ</span></a></li>
-              <li><a href="#contact" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors inline-flex items-center space-x-1"><span>Contact</span></a></li>
-            </ul>
-          </div>
-
-          {/* Col 4: Services */}
-          <div>
-            <h4 className="text-white font-bold text-base mb-4 border-b border-brand-700/70 dark:border-slate-800 pb-2">
-              Services
-            </h4>
-            <ul className="space-y-2.5 text-sm">
-              {SERVICES_DATA.slice(0, 6).map((service) => (
-                <li key={service.id}>
-                  <a href="#services" className="text-slate-300 dark:text-slate-300 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors">
-                    {service.title}
-                  </a>
-                </li>
+          <div className="lg:col-span-2">
+            <h4 className="font-mono text-xs font-bold uppercase bg-sig-sky text-sig-navy inline-block px-2 py-1 mb-4">Quick links</h4>
+            <ul className="space-y-2.5">
+              {quickLinks.map(([label, href]) => (
+                <li key={href}><a href={href} className={linkClass}>{label}</a></li>
               ))}
             </ul>
           </div>
 
-          {/* Col 5: Direct Contact */}
-          <div>
-            <h4 className="text-white font-bold text-base mb-4 border-b border-brand-700/70 dark:border-slate-800 pb-2">
-              Contact
-            </h4>
-            <div className="space-y-3 text-sm">
-              <a href={`tel:${COMPANY_INFO.phone}`} className="flex items-center space-x-2.5 text-slate-300 hover:text-cyan-400 transition-colors group">
-                <div className="p-1.5 rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500/20 transition-colors">
-                  <Phone className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                </div>
-                <span>+91 {COMPANY_INFO.phone}</span>
-              </a>
+          <div className="lg:col-span-3">
+            <h4 className="font-mono text-xs font-bold uppercase bg-sig-cyan text-sig-navy inline-block px-2 py-1 mb-4">Services</h4>
+            <ul className="space-y-2.5">
+              {SERVICES_DATA.slice(0, 6).map((service) => (
+                <li key={service.id}><a href="#services" className={linkClass}>{service.title}</a></li>
+              ))}
+            </ul>
+          </div>
 
-              <a href={`mailto:${COMPANY_INFO.email}`} className="flex items-center space-x-2.5 text-slate-300 hover:text-cyan-400 transition-colors group">
-                <div className="p-1.5 rounded-lg bg-amber-500/10 group-hover:bg-amber-500/20 transition-colors">
-                  <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                </div>
-                <span className="truncate">{COMPANY_INFO.email}</span>
+          <div className="lg:col-span-3">
+            <h4 className="font-mono text-xs font-bold uppercase bg-sig-azure text-sig-navy inline-block px-2 py-1 mb-4">Contact</h4>
+            <div className="space-y-3 font-mono text-sm">
+              <a href={`tel:${COMPANY_INFO.phone}`} className="flex items-center gap-3 text-sig-white hover:text-sig-sky">
+                <Phone className="w-5 h-5 text-sig-sky shrink-0" strokeWidth={3} /> +91 {COMPANY_INFO.phone}
               </a>
-
-              <div className="flex items-start space-x-2.5 text-slate-300">
-                <div className="p-1.5 rounded-lg bg-emerald-500/10 mt-0.5">
-                  <MapPin className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                </div>
-                <span>Surat | Ahmedabad, Gujarat, India</span>
+              <a href={`mailto:${COMPANY_INFO.email}`} className="flex items-center gap-3 text-sig-white hover:text-sig-sky break-all">
+                <Mail className="w-5 h-5 text-sig-cyan shrink-0" strokeWidth={3} /> {COMPANY_INFO.email}
+              </a>
+              <div className="flex items-start gap-3 text-sig-white">
+                <MapPin className="w-5 h-5 text-sig-azure shrink-0" strokeWidth={3} /> Surat | Ahmedabad, Gujarat, India
               </div>
             </div>
           </div>
-
         </div>
 
-        {/* Bottom Bar */}
-        <div className="pt-8 border-t border-brand-800/80 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-400 gap-4">
+        {/* Surat coverage */}
+        <div className="border-t-[3px] border-sig-white pt-8 mb-10">
+          <h4 className="font-mono text-xs font-bold uppercase text-sig-sky mb-4">
+            Best home nursing &amp; caretaker service in Surat — areas we serve
+          </h4>
+          <ul className="flex flex-wrap gap-2">
+            {SURAT_AREAS.map((area) => (
+              <li key={area}>
+                <a
+                  href="#areas"
+                  className="inline-block px-2.5 py-1 border-2 border-sig-white/40 font-mono text-[11px] uppercase text-sig-white/80 hover:bg-sig-sky hover:text-sig-navy hover:border-sig-sky transition-colors"
+                >
+                  Home nursing {area}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="border-t-[3px] border-sig-white pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-[11px] uppercase text-sig-white/70">
           <div>
-            © 2026 Riya Medicare. All Rights Reserved.
+            © {new Date().getFullYear()} Riya Medicare – Home nursing service in Surat &amp; Ahmedabad. All rights reserved.
           </div>
-
-          <div className="flex items-center space-x-1.5 text-slate-300 dark:text-slate-400">
-            <span>Delivered with</span>
-            <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 animate-pulse" />
-            <span>for families across Gujarat</span>
-          </div>
+          <a href="#home" className="brut-btn !py-2 !px-3 !text-[11px] sm:mr-20">
+            <ArrowUp className="w-4 h-4" strokeWidth={3} /> Back to top
+          </a>
         </div>
-
       </div>
     </footer>
   );
