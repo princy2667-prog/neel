@@ -13,8 +13,8 @@ export const COMPANY_INFO = {
   accountant: "Rajveer Rathod",
   primaryCity: "Surat",
   siteUrl: "https://riyamedicare.in",
-  logoUrl: "/assets/riya-medicare-logo.png",
-  symbolUrl: "/assets/riya-medicare-symbol.png",
+  logoUrl: `${import.meta.env.BASE_URL}assets/riya-medicare-logo.png`,
+  symbolUrl: `${import.meta.env.BASE_URL}assets/riya-medicare-symbol.png`,
 };
 
 export const SERVICES_DATA: ServiceItem[] = [
