@@ -54,7 +54,7 @@ export default function BookingModal({
     });
   };
 
-  const whatsappMessage = `*NEW HOME CARE REQUEST - RIYA MEDICARE*
+  const whatsappMessage = `*NEW HOME CARE REQUEST - HEALTHMITRA MEDICARE*
 ----------------------------------------
 👤 *Patient:* ${formData.patientName || 'Not specified'}
 📞 *Phone:* ${formData.phone}

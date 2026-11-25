@@ -56,7 +56,7 @@ export default function Hero({ onOpenBooking }: HeroProps) {
               variants={item}
               className="border-l-[6px] border-sig-azure pl-4 text-base sm:text-lg text-ink/80 leading-relaxed max-w-2xl mb-8"
             >
-              Riya Medicare brings qualified nurses and 24-hour caretakers to your home in Surat — ICU setup at
+              HealthMitra Medicare brings qualified nurses and 24-hour caretakers to your home in Surat — ICU setup at
               home, elderly care, baby care, post-operative recovery and physiotherapy. From Adajan and Vesu to
               Varachha and Katargam, compassionate care is a call away.
             </motion.p>
@@ -96,16 +96,16 @@ export default function Hero({ onOpenBooking }: HeroProps) {
             className="lg:col-span-5 relative max-w-md w-full mx-auto lg:mx-0 lg:ml-auto"
           >
             {/* stickers */}
-            <div className="absolute -top-6 -right-3 sm:-right-6 z-20 rotate-6 animate-wiggle bg-sig-azure text-sig-navy border-[3px] border-sig-navy shadow-[4px_4px_0_0_#0a1f5c] px-3 py-1.5 font-mono text-sm font-bold">
+            <div className="absolute -top-6 -right-3 sm:-right-6 z-20 rotate-6 animate-wiggle bg-sig-azure text-sig-navy border-[3px] border-sig-navy shadow-[2px_2px_0_0_#0a1f5c] px-3 py-1.5 font-mono text-sm font-bold">
               24/7 ✚
             </div>
-            <div className="absolute -bottom-5 -left-3 sm:-left-6 z-20 -rotate-3 bg-sig-cyan text-sig-navy border-[3px] border-sig-navy shadow-[4px_4px_0_0_#0a1f5c] px-3 py-1.5 font-mono text-xs font-bold uppercase flex items-center gap-1.5">
+            <div className="absolute -bottom-5 -left-3 sm:-left-6 z-20 -rotate-3 bg-sig-cyan text-sig-navy border-[3px] border-sig-navy shadow-[2px_2px_0_0_#0a1f5c] px-3 py-1.5 font-mono text-xs font-bold uppercase flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4" /> Background verified
             </div>
 
             <div className="brut-card overflow-hidden">
               <div className="bg-sig-navy text-sig-sky font-mono text-[11px] font-bold uppercase tracking-wider px-4 py-2.5 flex justify-between">
-                <span>Riya Medicare // Home care file</span>
+                <span>HealthMitra Medicare // Home care file</span>
                 <span>No. RM-247</span>
               </div>
 

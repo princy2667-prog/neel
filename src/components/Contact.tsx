@@ -76,7 +76,7 @@ export default function Contact() {
                 Direct Hotline
               </span>
 
-              <h3 className="text-2xl font-bold mb-6">Contact Riya Medicare</h3>
+              <h3 className="text-2xl font-bold mb-6">Contact HealthMitra Medicare</h3>
 
               <div className="space-y-6 text-slate-200">
                 <a

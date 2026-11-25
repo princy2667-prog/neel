@@ -95,7 +95,7 @@ export default function FAQ({ onOpenBooking }: FAQProps) {
         </div>
 
         {/* Still have questions */}
-        <div className="on-dark mt-14 border-[3px] border-ink shadow-[8px_8px_0_0_#3b82f6] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div className="on-dark mt-14 border-[3px] border-ink shadow-[4px_4px_0_0_#3b82f6] p-6 sm:p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <h3 className="text-2xl sm:text-3xl font-bold uppercase leading-none mb-2">Still have custom questions?</h3>
             <p className="font-mono text-sm text-sig-white/75">Speak directly with Neel Rathod or our senior nurse coordinator.</p>

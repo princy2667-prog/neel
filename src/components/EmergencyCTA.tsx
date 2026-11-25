@@ -4,7 +4,7 @@ import { Phone, MessageSquareHeart, ShieldCheck } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
 
 export default function EmergencyCTA() {
-  const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent('Hello Riya Medicare, I need 24/7 Home Nursing / Caretaker assistance in Surat.')}`;
+  const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent('Hello HealthMitra Medicare, I need 24/7 Home Nursing / Caretaker assistance in Surat.')}`;
 
   return (
     <section className="on-signal bg-sig-azure border-b-[3px] border-ink relative overflow-hidden">

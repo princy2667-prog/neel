@@ -33,7 +33,7 @@ export default function CareCategories({ onOpenBooking }: CareCategoriesProps) {
               transition={{ duration: 0.35, delay: (idx % 4) * 0.07, ease: [0.7, 0, 0.2, 1] }}
               onClick={onOpenBooking}
               aria-label={`${cat.title} – book care`}
-              className="group relative text-left h-80 overflow-hidden border-[3px] border-sig-white shadow-[6px_6px_0_0_#93c5fd] hover:shadow-[10px_10px_0_0_#3b82f6] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-150"
+              className="group relative text-left h-80 overflow-hidden border-[3px] border-sig-white shadow-[3px_3px_0_0_#93c5fd] hover:shadow-[2px_2px_0_0_#3b82f6] hover:-translate-x-0.5 hover:-translate-y-0.5 transition-all duration-150"
             >
               <img
                 src={cat.imageUrl}

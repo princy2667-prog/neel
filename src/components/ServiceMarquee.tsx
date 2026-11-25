@@ -1,7 +1,7 @@
 import React from 'react';
 import { SURAT_SEARCH_PHRASES } from '../data/medicareData';
 
-/** Black "caution tape" ribbon of what Riya Medicare offers in Surat. */
+/** Black "caution tape" ribbon of what HealthMitra Medicare offers in Surat. */
 export default function ServiceMarquee() {
   const row = (hidden: boolean) => (
     <ul className="flex shrink-0 items-center" aria-hidden={hidden || undefined}>

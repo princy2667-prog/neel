@@ -1,7 +1,7 @@
 import { ServiceItem, ProcedureItem, FaqItem, CareCategoryItem } from '../types';
 
 export const COMPANY_INFO = {
-  name: "RIYA MEDICARE",
+  name: "HEALTHMITRA MEDICARE",
   tagline: "Professional Nursing Homecare Services",
   business: "Home Nursing Service & Care Taker @ 24 Hours",
   phone: "7567425627",
@@ -12,9 +12,6 @@ export const COMPANY_INFO = {
   managingDirector: "Neel Rathod",
   accountant: "Rajveer Rathod",
   primaryCity: "Surat",
-  siteUrl: "https://riyamedicare.in",
-  logoUrl: `${import.meta.env.BASE_URL}assets/riya-medicare-logo.png`,
-  symbolUrl: `${import.meta.env.BASE_URL}assets/riya-medicare-symbol.png`,
 };
 
 export const SERVICES_DATA: ServiceItem[] = [
@@ -297,7 +294,7 @@ export const FAQS_DATA: FaqItem[] = [
   {
     id: "faq-1",
     question: "Which is the best home nursing service in Surat?",
-    answer: "Riya Medicare provides 24/7 home nursing and caretaker services across Surat with qualified male and female nurses, ICU setup at home, elderly care, baby care and post-hospital recovery. Call +91 7567425627 to discuss your family's needs and meet the right care professional."
+    answer: "HealthMitra Medicare provides 24/7 home nursing and caretaker services across Surat with qualified male and female nurses, ICU setup at home, elderly care, baby care and post-hospital recovery. Call +91 7567425627 to discuss your family's needs and meet the right care professional."
   },
   {
     id: "faq-2",
@@ -307,7 +304,7 @@ export const FAQS_DATA: FaqItem[] = [
   {
     id: "faq-3",
     question: "Are your services available 24 hours in Surat?",
-    answer: "Yes. Riya Medicare operates 24 hours a day, 7 days a week. We offer 12-hour day shifts, 12-hour night shifts and 24-hour live-in caretakers or nurses, plus on-demand procedure visits in Surat and Ahmedabad."
+    answer: "Yes. HealthMitra Medicare operates 24 hours a day, 7 days a week. We offer 12-hour day shifts, 12-hour night shifts and 24-hour live-in caretakers or nurses, plus on-demand procedure visits in Surat and Ahmedabad."
   },
   {
     id: "faq-4",

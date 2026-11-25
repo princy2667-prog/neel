@@ -18,7 +18,7 @@ export default function SuratCoverage({ onOpenBooking }: SuratCoverageProps) {
           eyebrow="Surat service areas"
           title="Home Nursing & Healthcare Across"
           highlight="Every Corner of Surat"
-          subtitle="Looking for the best home nursing service in Surat? Riya Medicare brings qualified nurses and 24-hour caretakers to your doorstep, wherever you live in the city."
+          subtitle="Looking for the best home nursing service in Surat? HealthMitra Medicare brings qualified nurses and 24-hour caretakers to your doorstep, wherever you live in the city."
         />
 
         <div className="grid lg:grid-cols-12 gap-8 items-stretch">

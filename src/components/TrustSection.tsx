@@ -27,7 +27,7 @@ export default function TrustSection() {
             <div className="relative border-[3px] border-ink bg-paper aspect-[4/3] overflow-hidden">
               <img
                 src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?auto=format&fit=crop&w=800&q=80"
-                alt="Riya Medicare professional nursing team – home healthcare in Surat"
+                alt="HealthMitra Medicare professional nursing team – home healthcare in Surat"
                 loading="lazy"
                 width={800}
                 height={600}
@@ -35,7 +35,7 @@ export default function TrustSection() {
               />
             </div>
 
-            <div className="absolute -bottom-8 right-2 sm:right-6 z-10 rotate-2 bg-sig-white text-sig-navy border-[3px] border-sig-navy shadow-[6px_6px_0_0_#3b82f6] p-4 flex items-center gap-4">
+            <div className="absolute -bottom-8 right-2 sm:right-6 z-10 rotate-2 bg-sig-white text-sig-navy border-[3px] border-sig-navy shadow-[3px_3px_0_0_#3b82f6] p-4 flex items-center gap-4">
               <span className="grid place-items-center w-12 h-12 bg-sig-cyan border-[3px] border-sig-navy">
                 <ShieldCheck className="w-7 h-7" strokeWidth={2.5} />
               </span>
@@ -67,7 +67,7 @@ export default function TrustSection() {
             </h2>
 
             <p className="border-l-[6px] border-sig-azure pl-4 text-base sm:text-lg text-ink/80 leading-relaxed mb-8">
-              Riya Medicare combines professional nursing expertise with compassionate human care — helping patients
+              HealthMitra Medicare combines professional nursing expertise with compassionate human care — helping patients
               recover at home and families feel supported across Surat and Ahmedabad.
             </p>
 

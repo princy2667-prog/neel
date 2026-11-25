@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════
-   RIYA MEDICARE — MEDICAL BRUTALIST DESIGN SYSTEM
+   HEALTHMITRA MEDICARE — MEDICAL BRUTALIST DESIGN SYSTEM
    Raw type · thick ink borders · hard offset shadows · clinical
    signal colours (azure, sky, cyan on clean white).
 ═══════════════════════════════════════════════════════════════ */
@@ -106,12 +106,12 @@
 .brut-card {
   background: var(--surface);
   border: 3px solid var(--ink);
-  box-shadow: 6px 6px 0 0 var(--ink);
+  box-shadow: 3px 3px 0 0 var(--ink);
   transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background-color 0.14s;
 }
 .brut-card-hover:hover {
-  transform: translate(-4px, -4px);
-  box-shadow: 10px 10px 0 0 var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 0 var(--ink);
 }
 
 .brut-btn {
@@ -123,7 +123,7 @@
   background: var(--sky);
   color: #0a1f5c;
   border: 3px solid var(--ink);
-  box-shadow: 5px 5px 0 0 var(--ink);
+  box-shadow: 2px 2px 0 0 var(--ink);
   font-family: 'Space Mono', ui-monospace, monospace;
   font-size: 0.82rem;
   font-weight: 700;
@@ -133,13 +133,13 @@
   cursor: pointer;
   transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.1s;
 }
-.brut-btn:hover { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 0 var(--ink); }
-.brut-btn:active { transform: translate(5px, 5px); box-shadow: 0 0 0 0 var(--ink); }
+.brut-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 var(--ink); }
+.brut-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 0 var(--ink); }
 .brut-btn--azure { background: var(--azure); }
 .brut-btn--cyan { background: var(--cyan); }
 .brut-btn--paper { background: var(--surface); color: var(--ink); }
-.brut-btn--ink { background: var(--ink); color: var(--paper); box-shadow: 5px 5px 0 0 var(--sky); }
-.brut-btn--ink:hover { box-shadow: 7px 7px 0 0 var(--sky); }
+.brut-btn--ink { background: var(--ink); color: var(--paper); box-shadow: 2px 2px 0 0 var(--sky); }
+.brut-btn--ink:hover { box-shadow: 3px 3px 0 0 var(--sky); }
 
 /* Mono label chip — e.g. "[ 01 / SERVICES ]" */
 .brut-tag {
@@ -255,7 +255,7 @@ input, select, textarea {
 }
 input:focus, select:focus, textarea:focus {
   outline: none;
-  box-shadow: 5px 5px 0 0 var(--azure);
+  box-shadow: 3px 3px 0 0 var(--azure);
   background-color: var(--surface);
 }
 input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--ink) 50%, transparent); }

@@ -2,6 +2,7 @@ import React from 'react';
 import { Phone, Mail, MapPin, Sun, Moon, ArrowUp } from 'lucide-react';
 import { COMPANY_INFO, SERVICES_DATA, SURAT_AREAS } from '../data/medicareData';
 import { useTheme } from '../context/ThemeContext';
+import Wordmark from './Wordmark';
 
 const quickLinks = [
   ['Home', '#home'],
@@ -30,21 +31,14 @@ export default function Footer() {
             <span className="w-2.5 h-2.5 bg-sig-white animate-blink" /> Home nursing service · Surat &amp; Ahmedabad
           </div>
           <div className="text-[clamp(2.75rem,11vw,9rem)] font-bold uppercase leading-[0.85] tracking-tighter text-sig-white">
-            Riya <span className="text-sig-sky">Medi</span>care<span className="text-sig-cyan">✚</span>
+            Health<span className="text-sig-sky">Mitra</span><br />Medicare<span className="text-sig-cyan">✚</span>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12">
           <div className="lg:col-span-4 space-y-5">
-            <a href="#home" className="inline-block bg-sig-white border-[3px] border-sig-white p-2 shadow-[5px_5px_0_0_#93c5fd]">
-              <img
-                src={COMPANY_INFO.logoUrl}
-                alt="Riya Medicare"
-                className="h-11 w-auto object-contain"
-                onError={(e) => {
-                  (e.target as HTMLImageElement).src = COMPANY_INFO.symbolUrl;
-                }}
-              />
+            <a href="#home" className="inline-block bg-sig-white border-[3px] border-sig-white p-2 shadow-[2px_2px_0_0_#93c5fd]">
+              <Wordmark />
             </a>
 
             <p className="border-l-[6px] border-sig-azure pl-4 text-sm text-sig-white/80 leading-relaxed italic">
@@ -117,7 +111,7 @@ export default function Footer() {
 
         <div className="border-t-[3px] border-sig-white pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-[11px] uppercase text-sig-white/70">
           <div>
-            © {new Date().getFullYear()} Riya Medicare – Home nursing service in Surat &amp; Ahmedabad. All rights reserved.
+            © {new Date().getFullYear()} HealthMitra Medicare – Home nursing service in Surat &amp; Ahmedabad. All rights reserved.
           </div>
           <a href="#home" className="brut-btn !py-2 !px-3 !text-[11px] sm:mr-20">
             <ArrowUp className="w-4 h-4" strokeWidth={3} /> Back to top

@@ -20,7 +20,7 @@ export default function TwentyFourSevenCare({ onOpenBooking }: TwentyFourSevenPr
             transition={{ duration: 0.5, ease: [0.7, 0, 0.2, 1] }}
             className="lg:col-span-5 w-full max-w-md mx-auto"
           >
-            <div className="bg-sig-sky text-sig-navy border-[3px] border-sig-white shadow-[10px_10px_0_0_#3b82f6] p-5 sm:p-6">
+            <div className="bg-sig-sky text-sig-navy border-[3px] border-sig-white shadow-[5px_5px_0_0_#3b82f6] p-5 sm:p-6">
               <div className="flex items-center justify-between font-mono text-xs font-bold uppercase tracking-widest">
                 <span>Non-stop assistance</span>
                 <span className="flex items-center gap-1.5">
@@ -59,7 +59,7 @@ export default function TwentyFourSevenCare({ onOpenBooking }: TwentyFourSevenPr
 
             <p className="border-l-[6px] border-sig-azure pl-4 text-base sm:text-lg text-sig-white/80 leading-relaxed mb-8 max-w-2xl">
               Round-the-clock nursing and caretaker services whenever your family needs professional support.
-              Whether it's night-shift vitals tracking or 24-hour live-in patient support in Surat, Riya Medicare
+              Whether it's night-shift vitals tracking or 24-hour live-in patient support in Surat, HealthMitra Medicare
               is by your side.
             </p>
 

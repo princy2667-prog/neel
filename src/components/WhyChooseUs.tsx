@@ -45,7 +45,7 @@ export default function WhyChooseUs() {
           icon={Building2}
           eyebrow="Excellence & reliability"
           title="Why Surat Families Choose"
-          highlight="Riya Medicare"
+          highlight="HealthMitra Medicare"
           subtitle="We combine clinical competence with genuine human empathy to support your loved ones at home."
         />
 

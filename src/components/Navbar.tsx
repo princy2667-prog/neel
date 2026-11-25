@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Phone, Menu, X, Sun, Moon } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
 import { useTheme } from '../context/ThemeContext';
+import Wordmark from './Wordmark';
 
 interface NavbarProps {
   onOpenBooking: () => void;
@@ -55,17 +56,10 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center gap-4">
           <a
             href="#home"
-            aria-label="Riya Medicare – home nursing in Surat"
-            className="flex items-center bg-sig-white border-[3px] border-sig-navy shadow-brut-sm px-2 py-1 hover:-translate-x-0.5 hover:-translate-y-0.5 transition-transform flex-shrink-0"
+            aria-label="HealthMitra Medicare – home nursing in Surat"
+            className="flex items-center bg-sig-white border-[3px] border-sig-navy shadow-brut-sm px-2 py-1 hover:-translate-x-px hover:-translate-y-px transition-transform flex-shrink-0"
           >
-            <img
-              src={COMPANY_INFO.logoUrl}
-              alt="Riya Medicare logo"
-              className="h-9 sm:h-10 w-auto object-contain"
-              onError={(e) => {
-                (e.target as HTMLImageElement).src = COMPANY_INFO.symbolUrl;
-              }}
-            />
+            <Wordmark />
           </a>
 
           {/* Desktop links */}
@@ -77,7 +71,7 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
                   key={link.id}
                   href={link.href}
                   aria-current={isActive ? 'true' : undefined}
-                  className={`px-3.5 py-2 font-mono text-xs font-bold uppercase tracking-wider border-2 transition-colors ${
+                  className={`px-3 py-2 whitespace-nowrap font-mono text-xs font-bold uppercase tracking-wider border-2 transition-colors ${
                     isActive
                       ? 'bg-sig-sky text-sig-navy border-ink shadow-brut-sm'
                       : 'border-transparent text-ink hover:bg-ink hover:text-paper'
@@ -99,12 +93,16 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
               <ThemeIcon className="w-4 h-4" strokeWidth={3} />
             </button>
 
-            <a href={`tel:${COMPANY_INFO.phone}`} className="hidden md:inline-flex brut-btn brut-btn--paper !py-2 !px-4">
+            <a
+              href={`tel:${COMPANY_INFO.phone}`}
+              aria-label="Call now"
+              className="hidden md:inline-flex brut-btn brut-btn--paper !py-2 !px-3 2xl:!px-4 whitespace-nowrap"
+            >
               <Phone className="w-4 h-4" />
-              Call now
+              <span className="hidden 2xl:inline">Call now</span>
             </a>
 
-            <button onClick={onOpenBooking} className="brut-btn brut-btn--azure !py-2 !px-3 sm:!px-4 !text-[11px] sm:!text-xs">
+            <button onClick={onOpenBooking} className="brut-btn brut-btn--azure !py-2 !px-3 sm:!px-4 !text-[11px] sm:!text-xs whitespace-nowrap">
               <span className="sm:hidden">Book</span>
               <span className="hidden sm:inline">Book home care</span>
             </button>
