@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 84" width="380" height="84" role="img" aria-label="HealthMitra Medicare">
+  <rect x="2" y="2" width="376" height="80" fill="#ffffff" stroke="#0a1f5c" stroke-width="3"/>
+  <g transform="translate(10 10) scale(1.5)">
+    <rect width="40" height="40" fill="#3b82f6"/>
+    <path d="M17 9H27V17H35V27H27V35H17V27H9V17H17Z" fill="#eaf2ff"/>
+    <path d="M15 7H25V15H33V25H25V33H15V25H7V15H15Z" fill="#0a1f5c"/>
+    <rect x="1.5" y="1.5" width="37" height="37" fill="none" stroke="#0a1f5c" stroke-width="3"/>
+  </g>
+  <text x="82" y="44" font-family="'Space Grotesk','Arial Black','Helvetica Neue',Arial,sans-serif" font-size="31" font-weight="800" letter-spacing="-0.5" fill="#0a1f5c">HEALTHMITRA</text>
+  <text x="83" y="66" font-family="'Space Mono','Courier New',monospace" font-size="13" font-weight="700" letter-spacing="7" fill="#0a1f5c" fill-opacity="0.75">MEDICARE</text>
+</svg>
