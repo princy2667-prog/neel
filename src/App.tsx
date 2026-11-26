@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MotionConfig } from 'framer-motion';
 import { ThemeProvider } from './context/ThemeContext';
 
 import Navbar from './components/Navbar';
@@ -44,16 +45,17 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 font-sans text-slate-900 dark:text-slate-100 selection:bg-brand-700 selection:text-white transition-colors duration-300">
+      <MotionConfig reducedMotion="user">
+      <div className="min-h-screen bg-paper font-sans text-ink transition-colors duration-300">
 
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[3000] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-brand-700 focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[3000] focus:px-4 focus:py-2 focus:rounded-full focus:bg-ink focus:text-paper focus:text-sm focus:font-medium"
       >
         Skip to main content
       </a>
 
-      {/* Sticky Navigation Bar */}
+      {/* Navigation */}
       <Navbar onOpenBooking={handleOpenBooking} />
 
       {/* Main Sections */}
@@ -86,7 +88,8 @@ export default function App() {
         initialServiceId={selectedServiceId}
         initialProcedureTitle={selectedProcedureTitle}
       />
-    </div>
+      </div>
+      </MotionConfig>
     </ThemeProvider>
   );
 }

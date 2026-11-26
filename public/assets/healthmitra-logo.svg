@@ -1,11 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 84" width="380" height="84" role="img" aria-label="HealthMitra Medicare">
-  <rect x="2" y="2" width="376" height="80" fill="#ffffff" stroke="#0a1f5c" stroke-width="3"/>
-  <g transform="translate(10 10) scale(1.5)">
-    <rect width="40" height="40" fill="#3b82f6"/>
-    <path d="M17 9H27V17H35V27H27V35H17V27H9V17H17Z" fill="#eaf2ff"/>
-    <path d="M15 7H25V15H33V25H25V33H15V25H7V15H15Z" fill="#0a1f5c"/>
-    <rect x="1.5" y="1.5" width="37" height="37" fill="none" stroke="#0a1f5c" stroke-width="3"/>
+  <rect x="0.5" y="0.5" width="379" height="83" rx="18" fill="#ffffff" stroke="#e5e5e3"/>
+  <g transform="translate(16 14)">
+    <rect width="56" height="56" rx="15" fill="#0a0a0a"/>
+    <path d="M22.4 11.2H33.6V22.4H44.8V33.6H33.6V44.8H22.4V33.6H11.2V22.4H22.4Z" fill="#ffffff"/>
   </g>
-  <text x="82" y="44" font-family="'Space Grotesk','Arial Black','Helvetica Neue',Arial,sans-serif" font-size="31" font-weight="800" letter-spacing="-0.5" fill="#0a1f5c">HEALTHMITRA</text>
-  <text x="83" y="66" font-family="'Space Mono','Courier New',monospace" font-size="13" font-weight="700" letter-spacing="7" fill="#0a1f5c" fill-opacity="0.75">MEDICARE</text>
+  <text x="90" y="46" font-family="Inter,'Helvetica Neue',Arial,sans-serif" font-size="29" font-weight="600" letter-spacing="-0.8" fill="#0a0a0a">HealthMitra</text>
+  <text x="91" y="66" font-family="Inter,'Helvetica Neue',Arial,sans-serif" font-size="12" font-weight="500" letter-spacing="6" fill="#0a0a0a" fill-opacity="0.6">MEDICARE</text>
 </svg>

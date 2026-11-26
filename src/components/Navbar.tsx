@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Phone, Menu, X, Sun, Moon } from 'lucide-react';
+import { Phone, Menu, X, Sun, Moon, ArrowRight } from 'lucide-react';
 import { COMPANY_INFO } from '../data/medicareData';
 import { useTheme } from '../context/ThemeContext';
 import Wordmark from './Wordmark';
@@ -22,10 +22,12 @@ const navLinks = [
 export default function Navbar({ onOpenBooking }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [scrolled, setScrolled] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
+      setScrolled(window.scrollY > 8);
       const scrollPosition = window.scrollY + 200;
       for (const { id } of navLinks) {
         const el = document.getElementById(id);
@@ -50,117 +52,151 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
   const ThemeIcon = theme === 'dark' ? Sun : Moon;
 
   return (
-    <header className="sticky top-0 z-[1000] w-full">
-      {/* Main navigation */}
-      <nav aria-label="Primary" className="bg-paper border-b-[3px] border-ink">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center gap-4">
-          <a
-            href="#home"
-            aria-label="HealthMitra Medicare – home nursing in Surat"
-            className="flex items-center bg-sig-white border-[3px] border-sig-navy shadow-brut-sm px-2 py-1 hover:-translate-x-px hover:-translate-y-px transition-transform flex-shrink-0"
-          >
-            <Wordmark />
+    <>
+      {/* Slim announcement strip */}
+      <div className="band hidden sm:block">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between text-xs text-ink/80">
+          <span className="flex items-center gap-2">
+            <span className="relative flex w-1.5 h-1.5">
+              <span className="absolute inset-0 rounded-full bg-ink animate-pulse-ring" />
+              <span className="relative w-1.5 h-1.5 rounded-full bg-ink" />
+            </span>
+            Home nursing &amp; caretaker service · Surat &amp; Ahmedabad · Open 24 hours
+          </span>
+          <a href={`tel:${COMPANY_INFO.phone}`} className="flex items-center gap-1.5 hover:text-ink transition-colors">
+            <Phone className="w-3 h-3" /> Helpline +91 {COMPANY_INFO.phone}
           </a>
+        </div>
+      </div>
 
-          {/* Desktop links */}
-          <div className="hidden xl:flex items-center gap-1.5">
-            {navLinks.map((link) => {
-              const isActive = activeSection === link.id;
-              return (
-                <a
-                  key={link.id}
-                  href={link.href}
-                  aria-current={isActive ? 'true' : undefined}
-                  className={`px-3 py-2 whitespace-nowrap font-mono text-xs font-bold uppercase tracking-wider border-2 transition-colors ${
-                    isActive
-                      ? 'bg-sig-sky text-sig-navy border-ink shadow-brut-sm'
-                      : 'border-transparent text-ink hover:bg-ink hover:text-paper'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            <button
-              onClick={toggleTheme}
-              aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
-              className="grid place-items-center w-10 h-10 border-[3px] border-ink bg-surface text-ink hover:bg-sig-sky hover:text-sig-navy transition-colors"
-            >
-              <ThemeIcon className="w-4 h-4" strokeWidth={3} />
-            </button>
-
+      <header
+        className={`sticky top-0 z-[1000] w-full transition-all duration-300 ${
+          scrolled
+            ? 'bg-paper/80 backdrop-blur-xl border-b border-line shadow-[0_8px_30px_-20px_rgb(0_0_0/0.25)]'
+            : 'bg-paper border-b border-transparent'
+        }`}
+      >
+        <nav aria-label="Primary">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex justify-between items-center gap-4">
             <a
-              href={`tel:${COMPANY_INFO.phone}`}
-              aria-label="Call now"
-              className="hidden md:inline-flex brut-btn brut-btn--paper !py-2 !px-3 2xl:!px-4 whitespace-nowrap"
+              href="#home"
+              aria-label="HealthMitra Medicare – home nursing in Surat"
+              className="flex items-center flex-shrink-0 transition-opacity hover:opacity-80"
             >
-              <Phone className="w-4 h-4" />
-              <span className="hidden 2xl:inline">Call now</span>
+              <Wordmark />
             </a>
 
-            <button onClick={onOpenBooking} className="brut-btn brut-btn--azure !py-2 !px-3 sm:!px-4 !text-[11px] sm:!text-xs whitespace-nowrap">
-              <span className="sm:hidden">Book</span>
-              <span className="hidden sm:inline">Book home care</span>
-            </button>
-
-            <button
-              onClick={() => setMobileMenuOpen((open) => !open)}
-              className="xl:hidden grid place-items-center w-10 h-10 border-[3px] border-ink bg-ink text-paper"
-              aria-label="Toggle navigation menu"
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              {mobileMenuOpen ? <X className="w-5 h-5" strokeWidth={3} /> : <Menu className="w-5 h-5" strokeWidth={3} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
-            <motion.div
-              id="mobile-menu"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="xl:hidden bg-paper border-t-[3px] border-ink overflow-hidden max-h-[calc(100vh-4rem)] overflow-y-auto"
-            >
-              <div className="px-4 py-4 grid gap-2">
-                {navLinks.map((link, i) => (
+            {/* Desktop links */}
+            <div className="hidden xl:flex items-center gap-1">
+              {navLinks.map((link) => {
+                const isActive = activeSection === link.id;
+                return (
                   <a
                     key={link.id}
                     href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center justify-between px-4 py-3 border-[3px] border-ink font-mono text-sm font-bold uppercase ${
-                      activeSection === link.id ? 'bg-sig-sky text-sig-navy shadow-brut-sm' : 'bg-surface text-ink'
+                    aria-current={isActive ? 'true' : undefined}
+                    className={`relative px-3.5 py-2 whitespace-nowrap text-sm font-medium rounded-full transition-colors ${
+                      isActive ? 'text-ink' : 'text-muted hover:text-ink'
                     }`}
                   >
-                    <span>{link.name}</span>
-                    <span className="opacity-60">0{i + 1}</span>
+                    {isActive && (
+                      <motion.span
+                        layoutId="nav-active-pill"
+                        className="absolute inset-0 rounded-full bg-ink/[0.06] border border-line"
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span className="relative">{link.name}</span>
                   </a>
-                ))}
-                <a href={`tel:${COMPANY_INFO.phone}`} className="brut-btn brut-btn--paper mt-2">
-                  <Phone className="w-4 h-4" /> Call +91 {COMPANY_INFO.phone}
-                </a>
-                <button
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenBooking();
-                  }}
-                  className="brut-btn brut-btn--azure"
-                >
-                  Book home care in Surat
-                </button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </header>
+                );
+              })}
+            </div>
+
+            {/* Actions */}
+            <div className="flex items-center gap-2 sm:gap-3">
+              <button
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+                className="grid place-items-center w-10 h-10 rounded-full border border-line text-ink hover:bg-ink/5 hover:border-ink/30 transition-all duration-300"
+              >
+                <ThemeIcon className="w-4 h-4" />
+              </button>
+
+              <a
+                href={`tel:${COMPANY_INFO.phone}`}
+                aria-label="Call now"
+                className="hidden md:inline-flex btn btn-outline !py-2.5 !px-4"
+              >
+                <Phone className="w-4 h-4" />
+                <span className="hidden 2xl:inline">Call now</span>
+              </a>
+
+              <button onClick={onOpenBooking} className="btn btn-primary !py-2.5 !px-4 sm:!px-5">
+                <span className="sm:hidden">Book</span>
+                <span className="hidden sm:inline">Book home care</span>
+                <ArrowRight className="btn-arrow w-4 h-4 hidden sm:block" />
+              </button>
+
+              <button
+                onClick={() => setMobileMenuOpen((open) => !open)}
+                className="xl:hidden grid place-items-center w-10 h-10 rounded-full border border-line text-ink hover:bg-ink/5 transition-colors"
+                aria-label="Toggle navigation menu"
+                aria-expanded={mobileMenuOpen}
+                aria-controls="mobile-menu"
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile menu */}
+          <AnimatePresence>
+            {mobileMenuOpen && (
+              <motion.div
+                id="mobile-menu"
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                className="xl:hidden bg-paper border-t border-line overflow-hidden max-h-[calc(100vh-4.5rem)] overflow-y-auto"
+              >
+                <div className="px-4 py-3 grid">
+                  {navLinks.map((link, i) => (
+                    <motion.a
+                      key={link.id}
+                      href={link.href}
+                      initial={{ opacity: 0, x: -8 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.04 * i, duration: 0.3 }}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`flex items-center justify-between py-4 border-b border-line text-lg font-medium ${
+                        activeSection === link.id ? 'text-ink' : 'text-muted'
+                      }`}
+                    >
+                      <span>{link.name}</span>
+                      <span className="text-xs tabular-nums text-muted">0{i + 1}</span>
+                    </motion.a>
+                  ))}
+                  <div className="grid gap-3 pt-5 pb-3">
+                    <a href={`tel:${COMPANY_INFO.phone}`} className="btn btn-outline">
+                      <Phone className="w-4 h-4" /> Call +91 {COMPANY_INFO.phone}
+                    </a>
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        onOpenBooking();
+                      }}
+                      className="btn btn-primary"
+                    >
+                      Book home care in Surat
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </nav>
+      </header>
+    </>
   );
 }

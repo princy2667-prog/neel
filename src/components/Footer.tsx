@@ -15,50 +15,36 @@ const quickLinks = [
   ['Contact', '#contact'],
 ];
 
-const linkClass = 'font-mono text-sm uppercase text-sig-white/80 hover:text-sig-sky hover:translate-x-1 inline-block transition-all';
+const linkClass = 'text-sm text-muted hover:text-ink inline-block transition-all duration-300 hover:translate-x-1';
+const headingClass = 'text-xs font-medium uppercase tracking-wider text-muted mb-5';
 
 export default function Footer() {
   const { theme, toggleTheme } = useTheme();
 
   return (
-    <footer className="on-dark halftone relative pb-24 lg:pb-12">
-      <div className="hazard !border-x-0 !border-t-0" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14">
-        {/* Giant wordmark */}
-        <div className="border-b-[3px] border-sig-white pb-8 mb-10">
-          <div className="font-mono text-xs font-bold uppercase text-sig-cyan mb-3 flex items-center gap-2">
-            <span className="w-2.5 h-2.5 bg-sig-white animate-blink" /> Home nursing service · Surat &amp; Ahmedabad
-          </div>
-          <div className="text-[clamp(2.75rem,11vw,9rem)] font-bold uppercase leading-[0.85] tracking-tighter text-sig-white">
-            Health<span className="text-sig-sky">Mitra</span><br />Medicare<span className="text-sig-cyan">✚</span>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 mb-12">
-          <div className="lg:col-span-4 space-y-5">
-            <a href="#home" className="inline-block bg-sig-white border-[3px] border-sig-white p-2 shadow-[2px_2px_0_0_#93c5fd]">
+    <footer className="band relative pb-24 lg:pb-10 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-14">
+          <div className="lg:col-span-4 space-y-6">
+            <a href="#home" className="inline-block" aria-label="HealthMitra Medicare – back to top">
               <Wordmark />
             </a>
-
-            <p className="border-l-[6px] border-sig-azure pl-4 text-sm text-sig-white/80 leading-relaxed italic">
+            <p className="font-serif italic text-2xl leading-snug text-ink/90 max-w-xs">
               "Service at your doorstep. Extraordinary people… Extraordinary care…!"
             </p>
-
-            <div className="font-mono text-xs text-sig-white/80 space-y-1.5">
-              <div><strong className="text-sig-sky">Managing Director:</strong> {COMPANY_INFO.managingDirector}</div>
-              <div><strong className="text-sig-sky">Chief Accountant:</strong> {COMPANY_INFO.accountant}</div>
+            <div className="text-sm text-muted space-y-1">
+              <div><span className="text-ink font-medium">Managing Director:</span> {COMPANY_INFO.managingDirector}</div>
+              <div><span className="text-ink font-medium">Chief Accountant:</span> {COMPANY_INFO.accountant}</div>
             </div>
-
-            <button onClick={toggleTheme} className="brut-btn brut-btn--paper !py-2 !px-3 !text-[11px]">
-              {theme === 'dark' ? <Sun className="w-4 h-4" strokeWidth={3} /> : <Moon className="w-4 h-4" strokeWidth={3} />}
+            <button onClick={toggleTheme} className="btn btn-outline !py-2 !px-4 !text-[13px]">
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
               {theme === 'dark' ? 'Light theme' : 'Dark theme'}
             </button>
           </div>
 
           <div className="lg:col-span-2">
-            <h4 className="font-mono text-xs font-bold uppercase bg-sig-sky text-sig-navy inline-block px-2 py-1 mb-4">Quick links</h4>
-            <ul className="space-y-2.5">
+            <h4 className={headingClass}>Quick links</h4>
+            <ul className="space-y-3">
               {quickLinks.map(([label, href]) => (
                 <li key={href}><a href={href} className={linkClass}>{label}</a></li>
               ))}
@@ -66,8 +52,8 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="font-mono text-xs font-bold uppercase bg-sig-cyan text-sig-navy inline-block px-2 py-1 mb-4">Services</h4>
-            <ul className="space-y-2.5">
+            <h4 className={headingClass}>Services</h4>
+            <ul className="space-y-3">
               {SERVICES_DATA.slice(0, 6).map((service) => (
                 <li key={service.id}><a href="#services" className={linkClass}>{service.title}</a></li>
               ))}
@@ -75,32 +61,30 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-3">
-            <h4 className="font-mono text-xs font-bold uppercase bg-sig-azure text-sig-navy inline-block px-2 py-1 mb-4">Contact</h4>
-            <div className="space-y-3 font-mono text-sm">
-              <a href={`tel:${COMPANY_INFO.phone}`} className="flex items-center gap-3 text-sig-white hover:text-sig-sky">
-                <Phone className="w-5 h-5 text-sig-sky shrink-0" strokeWidth={3} /> +91 {COMPANY_INFO.phone}
+            <h4 className={headingClass}>Contact</h4>
+            <div className="space-y-4 text-sm">
+              <a href={`tel:${COMPANY_INFO.phone}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                <Phone className="w-4 h-4 text-muted shrink-0" /> +91 {COMPANY_INFO.phone}
               </a>
-              <a href={`mailto:${COMPANY_INFO.email}`} className="flex items-center gap-3 text-sig-white hover:text-sig-sky break-all">
-                <Mail className="w-5 h-5 text-sig-cyan shrink-0" strokeWidth={3} /> {COMPANY_INFO.email}
+              <a href={`mailto:${COMPANY_INFO.email}`} className="flex items-center gap-3 hover:opacity-80 transition-opacity break-all">
+                <Mail className="w-4 h-4 text-muted shrink-0" /> {COMPANY_INFO.email}
               </a>
-              <div className="flex items-start gap-3 text-sig-white">
-                <MapPin className="w-5 h-5 text-sig-azure shrink-0" strokeWidth={3} /> Surat | Ahmedabad, Gujarat, India
+              <div className="flex items-start gap-3">
+                <MapPin className="w-4 h-4 text-muted shrink-0 mt-0.5" /> Surat | Ahmedabad, Gujarat, India
               </div>
             </div>
           </div>
         </div>
 
         {/* Surat coverage */}
-        <div className="border-t-[3px] border-sig-white pt-8 mb-10">
-          <h4 className="font-mono text-xs font-bold uppercase text-sig-sky mb-4">
-            Best home nursing &amp; caretaker service in Surat — areas we serve
-          </h4>
+        <div className="border-t border-line pt-8 mb-10">
+          <h4 className={headingClass}>Best home nursing &amp; caretaker service in Surat — areas we serve</h4>
           <ul className="flex flex-wrap gap-2">
             {SURAT_AREAS.map((area) => (
               <li key={area}>
                 <a
                   href="#areas"
-                  className="inline-block px-2.5 py-1 border-2 border-sig-white/40 font-mono text-[11px] uppercase text-sig-white/80 hover:bg-sig-sky hover:text-sig-navy hover:border-sig-sky transition-colors"
+                  className="inline-block px-3 py-1.5 rounded-full border border-line text-xs text-muted hover:bg-ink hover:text-paper hover:border-ink transition-colors duration-300"
                 >
                   Home nursing {area}
                 </a>
@@ -109,12 +93,20 @@ export default function Footer() {
           </ul>
         </div>
 
-        <div className="border-t-[3px] border-sig-white pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 font-mono text-[11px] uppercase text-sig-white/70">
+        {/* Giant outlined wordmark */}
+        <div
+          aria-hidden="true"
+          className="text-outline select-none text-center font-semibold tracking-tighter leading-[0.85] text-[clamp(3rem,13.5vw,12rem)] -mb-2 sm:-mb-4"
+        >
+          HealthMitra
+        </div>
+
+        <div className="border-t border-line pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-muted">
           <div>
             © {new Date().getFullYear()} HealthMitra Medicare – Home nursing service in Surat &amp; Ahmedabad. All rights reserved.
           </div>
-          <a href="#home" className="brut-btn !py-2 !px-3 !text-[11px] sm:mr-20">
-            <ArrowUp className="w-4 h-4" strokeWidth={3} /> Back to top
+          <a href="#home" className="btn btn-outline !py-2 !px-4 !text-xs sm:mr-20">
+            <ArrowUp className="w-3.5 h-3.5" /> Back to top
           </a>
         </div>
       </div>

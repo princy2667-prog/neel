@@ -3,67 +3,81 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════
-   HEALTHMITRA MEDICARE — MEDICAL BRUTALIST DESIGN SYSTEM
-   Raw type · thick ink borders · hard offset shadows · clinical
-   signal colours (azure, sky, cyan on clean white).
+   HEALTHMITRA MEDICARE — MONOCHROME CLINICAL DESIGN SYSTEM
+   White + black only. Hairline borders, soft radii, generous
+   whitespace and slow, quiet motion.
 ═══════════════════════════════════════════════════════════════ */
 :root {
-  --paper: #eef4ff;
-  --surface: #ffffff;
-  --ink: #0a1f5c;
-  --paper-rgb: 238 244 255;
-  --surface-rgb: 255 255 255;
-  --ink-rgb: 10 31 92;
-  --azure: #3b82f6;
-  --sky: #93c5fd;
-  --cyan: #4fd1ff;
-  --royal: #1d4ed8;
+  --paper: 255 255 255;
+  --surface: 246 246 245;
+  --card: 255 255 255;
+  --ink: 10 10 10;
+  --muted: 98 98 96;
+  --line: 229 229 227;
+  --band: 10 10 10;
+  color-scheme: light;
 }
 
 .dark {
-  --paper: #0a1c52;
-  --surface: #112a75;
-  --ink: #eaf2ff;
-  --paper-rgb: 10 28 82;
-  --surface-rgb: 17 42 117;
-  --ink-rgb: 234 242 255;
+  --paper: 10 10 10;
+  --surface: 18 18 18;
+  --card: 23 23 23;
+  --ink: 245 245 244;
+  --muted: 163 163 160;
+  --line: 40 40 40;
+  --band: 22 22 22;
+  color-scheme: dark;
+}
+
+/* Black sections. Tokens are re-scoped so every nested utility
+   (text-ink, border-line, bg-card …) adapts automatically. */
+.band {
+  --paper: 10 10 10;
+  --surface: 20 20 20;
+  --card: 24 24 24;
+  --ink: 250 250 249;
+  --muted: 166 166 163;
+  --line: 52 52 52;
+  background-color: rgb(var(--band));
+  color: rgb(var(--ink));
 }
 
 @layer base {
   html {
     scroll-behavior: smooth;
-    font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+    scroll-padding-top: 5rem;
   }
 
   body {
-    @apply antialiased overflow-x-hidden;
-    background-color: var(--paper);
-    color: var(--ink);
+    @apply font-sans antialiased overflow-x-hidden;
+    background-color: rgb(var(--paper));
+    color: rgb(var(--ink));
+    font-feature-settings: 'cv11', 'ss01';
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Space Grotesk', system-ui, sans-serif;
-    letter-spacing: -0.02em;
-  }
-
-  h1, h2 {
-    text-transform: uppercase;
-    letter-spacing: -0.035em;
-    line-height: 0.98;
+  h1, h2, h3, h4 {
+    letter-spacing: -0.025em;
   }
 
   ::selection {
-    background: var(--sky);
-    color: #0a1f5c;
+    background: rgb(var(--ink));
+    color: rgb(var(--paper));
+  }
+
+  :focus-visible {
+    outline: 2px solid rgb(var(--ink));
+    outline-offset: 3px;
+    border-radius: 6px;
   }
 }
 
-/* Chunky scrollbar */
-::-webkit-scrollbar { width: 14px; height: 14px; }
-::-webkit-scrollbar-track { background: var(--paper); border-left: 3px solid var(--ink); }
-::-webkit-scrollbar-thumb { background: var(--ink); border: 3px solid var(--paper); }
+/* Slim scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: rgb(var(--paper)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--line)); border-radius: 999px; border: 2px solid rgb(var(--paper)); }
+::-webkit-scrollbar-thumb:hover { background: rgb(var(--muted) / 0.6); }
 
-/* Reduced Motion Override for Accessibility */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
@@ -71,192 +85,136 @@
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
-  .custom-cursor { display: none !important; }
-}
-
-:focus-visible {
-  outline: 4px solid var(--azure);
-  outline-offset: 3px;
-}
-
-/* Re-scope the theme tokens inside a section, so every brutalist
-   component placed in it adapts automatically. */
-.on-dark {
-  --paper: #1d4ed8;
-  --surface: #1a43bd;
-  --ink: #eaf2ff;
-  --paper-rgb: 29 78 216;
-  --surface-rgb: 26 67 189;
-  --ink-rgb: 234 242 255;
-  background-color: #1d4ed8;
-  color: #ffffff;
-}
-.on-signal {
-  --paper: #eef4ff;
-  --surface: #ffffff;
-  --ink: #0a1f5c;
-  --paper-rgb: 238 244 255;
-  --surface-rgb: 255 255 255;
-  --ink-rgb: 10 31 92;
-  color: #0a1f5c;
 }
 
 @layer components {
-/* ── Core brutalist building blocks ───────────────────────────── */
-.brut-card {
-  background: var(--surface);
-  border: 3px solid var(--ink);
-  box-shadow: 3px 3px 0 0 var(--ink);
-  transition: transform 0.14s ease-out, box-shadow 0.14s ease-out, background-color 0.14s;
-}
-.brut-card-hover:hover {
-  transform: translate(-2px, -2px);
-  box-shadow: 5px 5px 0 0 var(--ink);
+  /* ── Buttons ───────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium
+           whitespace-nowrap select-none cursor-pointer
+           transition-all duration-300 ease-calm;
+  }
+  .btn-primary {
+    background: rgb(var(--ink));
+    color: rgb(var(--paper));
+    border: 1px solid rgb(var(--ink));
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -12px rgb(var(--ink) / 0.55);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-outline {
+    background: transparent;
+    color: rgb(var(--ink));
+    border: 1px solid rgb(var(--ink) / 0.22);
+  }
+  .btn-outline:hover {
+    border-color: rgb(var(--ink));
+    background: rgb(var(--ink) / 0.05);
+    transform: translateY(-2px);
+  }
+  .btn-outline:active { transform: translateY(0); }
+  .btn .btn-arrow { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
+
+  /* ── Surfaces ──────────────────────────────────────────────── */
+  .card {
+    background: rgb(var(--card));
+    border: 1px solid rgb(var(--line));
+    border-radius: 1.5rem;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s ease, box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+                background-color 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+    border-color: rgb(var(--ink) / 0.35);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.04), 0 24px 48px -24px rgb(0 0 0 / 0.22);
+  }
+
+  /* ── Small pieces ──────────────────────────────────────────── */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-medium tracking-wide;
+    border: 1px solid rgb(var(--line));
+    background: rgb(var(--card));
+    color: rgb(var(--ink));
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-medium;
+    border: 1px solid rgb(var(--line));
+    color: rgb(var(--muted));
+  }
+  .icon-chip {
+    @apply grid place-items-center shrink-0 rounded-2xl;
+    background: rgb(var(--surface));
+    border: 1px solid rgb(var(--line));
+    color: rgb(var(--ink));
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .group:hover .icon-chip {
+    background: rgb(var(--ink));
+    color: rgb(var(--paper));
+    transform: scale(1.06);
+  }
+
+  /* ── Form fields ───────────────────────────────────────────── */
+  .field {
+    @apply w-full rounded-xl px-4 py-3 text-sm outline-none transition-all duration-200;
+    background: rgb(var(--paper));
+    color: rgb(var(--ink));
+    border: 1px solid rgb(var(--line));
+  }
+  .field:hover { border-color: rgb(var(--ink) / 0.35); }
+  .field:focus {
+    border-color: rgb(var(--ink));
+    box-shadow: 0 0 0 4px rgb(var(--ink) / 0.07);
+  }
+  .field::placeholder { color: rgb(var(--muted) / 0.7); }
+  .field-label {
+    @apply block text-xs font-medium mb-2;
+    color: rgb(var(--muted));
+  }
+  select.field option, select.field optgroup {
+    background: rgb(var(--card));
+    color: rgb(var(--ink));
+  }
 }
 
-.brut-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  padding: 0.95rem 1.5rem;
-  background: var(--sky);
-  color: #0a1f5c;
-  border: 3px solid var(--ink);
-  box-shadow: 2px 2px 0 0 var(--ink);
-  font-family: 'Space Mono', ui-monospace, monospace;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.1s ease-out, box-shadow 0.1s ease-out, background-color 0.1s;
-}
-.brut-btn:hover { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 var(--ink); }
-.brut-btn:active { transform: translate(2px, 2px); box-shadow: 0 0 0 0 var(--ink); }
-.brut-btn--azure { background: var(--azure); }
-.brut-btn--cyan { background: var(--cyan); }
-.brut-btn--paper { background: var(--surface); color: var(--ink); }
-.brut-btn--ink { background: var(--ink); color: var(--paper); box-shadow: 2px 2px 0 0 var(--sky); }
-.brut-btn--ink:hover { box-shadow: 3px 3px 0 0 var(--sky); }
-
-/* Mono label chip — e.g. "[ 01 / SERVICES ]" */
-.brut-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.25rem 0.6rem;
-  border: 2px solid var(--ink);
-  font-family: 'Space Mono', ui-monospace, monospace;
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  background: var(--surface);
-  color: var(--ink);
+/* ── Decorative helpers ──────────────────────────────────────── */
+/* Fine dot grid that fades out toward the edges */
+.dot-grid {
+  background-image: radial-gradient(rgb(var(--ink) / 0.14) 1px, transparent 1px);
+  background-size: 22px 22px;
+  -webkit-mask-image: radial-gradient(ellipse at 50% 40%, #000 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse at 50% 40%, #000 25%, transparent 72%);
 }
 
-.font-mono { font-family: 'Space Mono', ui-monospace, monospace; }
-}
-
-/* Highlighter marker — replaces the old gradient text */
-.text-gradient,
-.text-gradient-cyan {
-  background: var(--sky);
-  color: #0a1f5c;
-  -webkit-text-fill-color: #0a1f5c;
-  padding: 0 0.18em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
-}
-
-/* ── Medical motifs ───────────────────────────────────────────── */
-/* ECG graph paper */
-.ecg-paper {
-  background-color: var(--paper);
-  background-image:
-    linear-gradient(rgba(37, 99, 235, 0.28) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.28) 2px, transparent 2px),
-    linear-gradient(rgba(37, 99, 235, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.12) 1px, transparent 1px);
-  background-size: 80px 80px, 80px 80px, 16px 16px, 16px 16px;
-}
-.dark .ecg-paper {
-  background-image:
-    linear-gradient(rgba(37, 99, 235, 0.22) 2px, transparent 2px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.22) 2px, transparent 2px),
-    linear-gradient(rgba(37, 99, 235, 0.09) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(37, 99, 235, 0.09) 1px, transparent 1px);
-}
-
-/* Caution-tape stripe */
-.hazard {
-  height: 18px;
-  background: repeating-linear-gradient(-45deg, #0a1f5c 0 16px, #93c5fd 16px 32px);
-  border-block: 3px solid #0a1f5c;
-}
-
-/* Barcode strip for the patient-chart card */
-.barcode {
-  height: 38px;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--ink) 0 2px, transparent 2px 5px,
-    var(--ink) 5px 6px, transparent 6px 9px,
-    var(--ink) 9px 12px, transparent 12px 14px,
-    var(--ink) 14px 15px, transparent 15px 19px
-  );
-}
-
-/* Dotted halftone texture for dark blocks */
-.halftone {
-  background-image: radial-gradient(rgba(234, 242, 255, 0.14) 1.5px, transparent 1.5px);
-  background-size: 14px 14px;
-}
-
+/* Draw-on ECG trace */
 .ecg-line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  animation: ecg 4.5s steps(60, end) infinite;
+  animation: ecg 4.5s ease-in-out infinite;
 }
 
-/* Blobs / soft glows don't exist in brutalism */
-.blur-3xl, .blur-2xl { display: none !important; }
-
-/* ── Legacy utility remaps (older components) ─────────────────── */
-.bg-white { background-color: var(--surface); }
-.bg-slate-50 { background-color: var(--paper); }
-.bg-slate-100 { background-color: color-mix(in srgb, var(--ink) 8%, var(--paper)); }
-.bg-slate-900 { background-color: #1d4ed8; }
-.bg-brand-50, .bg-cyan-50 { background-color: var(--surface); }
-.bg-brand-100 { background-color: var(--sky); color: #0a1f5c; }
-
-.text-slate-900, .text-brand-900, .text-brand-800, .text-brand-700 { color: var(--ink); }
-.text-slate-700 { color: color-mix(in srgb, var(--ink) 88%, transparent); }
-.text-slate-600 { color: color-mix(in srgb, var(--ink) 78%, transparent); }
-.text-slate-500, .text-slate-400 { color: color-mix(in srgb, var(--ink) 62%, transparent); }
-.text-cyan-700, .text-cyan-600 { color: var(--ink); }
-
-[class*="border-slate-"],
-[class*="border-brand-"],
-[class*="border-cyan-"] { border-color: var(--ink); }
-
-/* Hover colours that used to be soft tints */
-.hover\:bg-white:hover, .hover\:bg-slate-50:hover, .hover\:bg-brand-50:hover { background-color: var(--sky); color: #0a1f5c; }
-
-/* Forms */
-input, select, textarea {
-  background-color: var(--surface);
-  color: var(--ink);
-  border: 3px solid var(--ink) !important;
-  border-radius: 0 !important;
-  font-family: 'Space Mono', ui-monospace, monospace;
+/* Outlined giant type */
+.text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(var(--ink) / 0.28);
 }
-input:focus, select:focus, textarea:focus {
-  outline: none;
-  box-shadow: 3px 3px 0 0 var(--azure);
-  background-color: var(--surface);
+
+/* Soft edge fade for the marquee */
+.fade-x {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 }
-input::placeholder, textarea::placeholder { color: color-mix(in srgb, var(--ink) 50%, transparent); }
-select option, select optgroup { background-color: var(--surface); color: var(--ink); }
+
+/* Photos: calm monochrome that warms to colour on hover */
+.photo-mono {
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 0.7s ease, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.group:hover .photo-mono,
+.photo-mono:hover {
+  filter: grayscale(0.15) contrast(1.02);
+}

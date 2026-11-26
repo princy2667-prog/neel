@@ -10,10 +10,10 @@ export default function FloatingActions() {
       <a
         href={`tel:${COMPANY_INFO.phone}`}
         aria-label="Call HealthMitra Medicare"
-        className="group relative flex items-center justify-center w-14 h-14 bg-sig-sky text-sig-navy border-[3px] border-sig-navy shadow-[2px_2px_0_0_#0a1f5c] hover:-translate-x-px hover:-translate-y-px hover:shadow-[2px_2px_0_0_#0a1f5c] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all duration-100"
+        className="group relative flex items-center justify-center w-14 h-14 rounded-full bg-ink text-paper ring-1 ring-paper/25 shadow-float hover:-translate-y-1 hover:shadow-lift active:translate-y-0 transition-all duration-300"
       >
-        <Phone className="w-6 h-6" strokeWidth={3} />
-        <span className="absolute right-16 bg-sig-navy text-sig-sky font-mono text-[11px] font-bold uppercase px-3 py-1.5 border-2 border-sig-sky whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden sm:block">
+        <Phone className="w-5 h-5" />
+        <span className="absolute right-[4.25rem] rounded-full bg-ink text-paper text-xs font-medium px-3.5 py-2 whitespace-nowrap opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none hidden sm:block">
           Call {COMPANY_INFO.phone}
         </span>
       </a>
@@ -23,14 +23,13 @@ export default function FloatingActions() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Contact HealthMitra Medicare on WhatsApp"
-        className="group relative flex items-center justify-center w-14 h-14 border-[3px] border-sig-navy shadow-[2px_2px_0_0_#0a1f5c] hover:-translate-x-px hover:-translate-y-px hover:shadow-[2px_2px_0_0_#0a1f5c] active:translate-x-0.5 active:translate-y-0.5 active:shadow-none transition-all duration-100"
+        className="group relative flex items-center justify-center w-14 h-14 rounded-full shadow-float hover:-translate-y-1 hover:shadow-lift active:translate-y-0 transition-all duration-300"
         style={{ backgroundColor: '#25D366' }}
       >
-        {/* Official WhatsApp Icon SVG */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 175.216 175.552"
-          className="w-9 h-9"
+          className="w-8 h-8"
         >
           <defs>
             <linearGradient id="wa-grad" x1="85.915" x2="86.535" y1="32.567" y2="137.092" gradientUnits="userSpaceOnUse">
@@ -52,15 +51,15 @@ export default function FloatingActions() {
           />
         </svg>
 
-        {/* Pulse ring */}
+        {/* Soft pulse ring */}
         <span
-          className="absolute inset-0 animate-ping opacity-20 pointer-events-none"
-          style={{ backgroundColor: '#25D366' }}
+          className="absolute inset-0 rounded-full animate-pulse-ring pointer-events-none"
+          style={{ border: '1px solid #25D366' }}
+          aria-hidden="true"
         />
 
-        {/* Tooltip — desktop only */}
-        <span className="absolute right-16 bg-sig-navy text-sig-sky font-mono text-[11px] font-bold uppercase px-3 py-1.5 border-2 border-sig-sky whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden sm:block">
-          WhatsApp Support 24/7
+        <span className="absolute right-[4.25rem] rounded-full bg-ink text-paper text-xs font-medium px-3.5 py-2 whitespace-nowrap opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 pointer-events-none hidden sm:block">
+          WhatsApp support 24/7
         </span>
       </a>
     </div>
