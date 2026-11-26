@@ -53,22 +53,6 @@ export default function Navbar({ onOpenBooking }: NavbarProps) {
 
   return (
     <>
-      {/* Slim announcement strip */}
-      <div className="band hidden sm:block">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-9 flex items-center justify-between text-xs text-ink/80">
-          <span className="flex items-center gap-2">
-            <span className="relative flex w-1.5 h-1.5">
-              <span className="absolute inset-0 rounded-full bg-ink animate-pulse-ring" />
-              <span className="relative w-1.5 h-1.5 rounded-full bg-ink" />
-            </span>
-            Home nursing &amp; caretaker service · Surat &amp; Ahmedabad · Open 24 hours
-          </span>
-          <a href={`tel:${COMPANY_INFO.phone}`} className="flex items-center gap-1.5 hover:text-ink transition-colors">
-            <Phone className="w-3 h-3" /> Helpline +91 {COMPANY_INFO.phone}
-          </a>
-        </div>
-      </div>
-
       <header
         className={`sticky top-0 z-[1000] w-full transition-all duration-300 ${
           scrolled
