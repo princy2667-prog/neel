@@ -1,6 +1,6 @@
 import React from 'react';
 import { Phone, Mail, MapPin, Sun, Moon, ArrowUp } from 'lucide-react';
-import { COMPANY_INFO, SERVICES_DATA, SURAT_AREAS } from '../data/medicareData';
+import { COMPANY_INFO, SERVICES_DATA } from '../data/medicareData';
 import { useTheme } from '../context/ThemeContext';
 import Wordmark from './Wordmark';
 
@@ -14,6 +14,8 @@ const quickLinks = [
   ['FAQ', '#faq'],
   ['Contact', '#contact'],
 ];
+
+const SERVICE_CITIES = ['Surat', 'Ahmedabad', 'Mumbai'];
 
 const linkClass = 'text-sm text-muted hover:text-ink inline-block transition-all duration-300 hover:translate-x-1';
 const headingClass = 'text-xs font-medium uppercase tracking-wider text-muted mb-5';
@@ -76,17 +78,17 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Surat coverage */}
+        {/* Cities served */}
         <div className="border-t border-line pt-8 mb-10">
-          <h4 className={headingClass}>Best home nursing &amp; caretaker service in Surat — areas we serve</h4>
+          <h4 className={headingClass}>Home nursing &amp; caretaker service — cities we serve</h4>
           <ul className="flex flex-wrap gap-2">
-            {SURAT_AREAS.map((area) => (
-              <li key={area}>
+            {SERVICE_CITIES.map((city) => (
+              <li key={city}>
                 <a
-                  href="#areas"
-                  className="inline-block px-3 py-1.5 rounded-full border border-line text-xs text-muted hover:bg-ink hover:text-paper hover:border-ink transition-colors duration-300"
+                  href="#contact"
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-line text-sm text-muted hover:bg-ink hover:text-paper hover:border-ink transition-colors duration-300"
                 >
-                  Home nursing {area}
+                  <MapPin className="w-3.5 h-3.5" /> {city}
                 </a>
               </li>
             ))}
