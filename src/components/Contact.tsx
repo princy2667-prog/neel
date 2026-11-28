@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, MessageSquareHeart } from 'lucide-react';
 import { COMPANY_INFO, SERVICES_DATA, PROCEDURES_DATA, EQUIPMENT_DATA } from '../data/medicareData';
 import { ContactFormData } from '../types';
 import SectionHeading from './SectionHeading';
@@ -18,8 +18,7 @@ export default function Contact() {
   });
 
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const validateForm = () => {
     const errs: Record<string, string> = {};
@@ -35,6 +34,17 @@ export default function Contact() {
     return errs;
   };
 
+  const whatsappMessage = `*NEW CARE REQUEST - HEALTHMITRA MEDICARE*
+----------------------------------------
+👤 *Name:* ${formData.name.trim()}
+📞 *Phone:* ${formData.phone.trim()}
+✉️ *Email:* ${formData.email.trim() || 'N/A'}
+📍 *City:* ${formData.city}
+🩺 *Service:* ${formData.service}
+📝 *Message:* ${formData.message.trim() || 'N/A'}`;
+
+  const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const validationErrors = validateForm();
@@ -44,13 +54,9 @@ export default function Contact() {
     }
 
     setErrors({});
-    setIsSubmitting(true);
-
-    // Form frontend state ready for backend endpoint integration
-    setTimeout(() => {
-      setIsSubmitting(false);
-      setSubmitStatus('success');
-    }, 1000);
+    // Must run directly inside the submit event, or the browser blocks the new tab
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    setIsSubmitted(true);
   };
 
   const contactRows = [
@@ -119,26 +125,36 @@ export default function Contact() {
           {/* Right: form */}
           <Reveal delay={0.1} className="lg:col-span-7">
             <div className="card p-6 sm:p-10">
-              {submitStatus === 'success' ? (
+              {isSubmitted ? (
                 <div className="text-center py-10">
                   <div className="w-16 h-16 rounded-full bg-ink text-paper flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle2 className="w-8 h-8" strokeWidth={1.75} />
+                    <MessageSquareHeart className="w-8 h-8" strokeWidth={1.75} />
                   </div>
-                  <h3 className="text-2xl font-semibold mb-2">Care request submitted</h3>
+                  <h3 className="text-2xl font-semibold mb-2">Press send in WhatsApp</h3>
                   <p className="text-muted text-sm max-w-md mx-auto mb-7 leading-relaxed">
-                    Thank you, <strong className="text-ink">{formData.name}</strong>. Our care team has received your request for{' '}
-                    <strong className="text-ink">{formData.service}</strong> in <strong className="text-ink">{formData.city}</strong> and will
-                    call you at <strong className="text-ink">{formData.phone}</strong> shortly.
+                    Your request for <strong className="text-ink">{formData.service}</strong> in{' '}
+                    <strong className="text-ink">{formData.city}</strong> reaches our team only after you send the message
+                    in WhatsApp.
                   </p>
-                  <button onClick={() => setSubmitStatus('idle')} className="btn btn-outline">
-                    Submit another inquiry
-                  </button>
+                  <div className="grid gap-3 max-w-xs mx-auto">
+                    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                      <MessageSquareHeart className="w-4 h-4" />
+                      <span>WhatsApp didn't open? Tap here</span>
+                    </a>
+                    <a href={`tel:${COMPANY_INFO.phone}`} className="btn btn-outline">
+                      <Phone className="w-4 h-4" />
+                      <span>Call {COMPANY_INFO.phone}</span>
+                    </a>
+                    <button onClick={() => setIsSubmitted(false)} className="btn btn-outline">
+                      Back to the form
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5" noValidate>
                   <div className="mb-2">
                     <h3 className="text-2xl font-semibold mb-1">Send a care request</h3>
-                    <p className="text-sm text-muted">Fill out the form below to receive a call back from our nursing team.</p>
+                    <p className="text-sm text-muted">Fill out the form below and send it to our nursing team on WhatsApp.</p>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -241,11 +257,10 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="btn btn-primary w-full !py-4 disabled:opacity-60 disabled:pointer-events-none"
+                    className="btn btn-primary w-full !py-4"
                   >
                     <Send className="w-4 h-4" />
-                    <span>{isSubmitting ? 'Submitting request…' : 'Request care'}</span>
+                    <span>Send request on WhatsApp</span>
                   </button>
                 </form>
               )}

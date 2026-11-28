@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, CheckCircle2, Phone, MessageSquareHeart, MapPin } from 'lucide-react';
-import confetti from 'canvas-confetti';
+import { X, Phone, MessageSquareHeart, MapPin } from 'lucide-react';
 import { COMPANY_INFO, SERVICES_DATA, PROCEDURES_DATA, EQUIPMENT_DATA } from '../data/medicareData';
 
 interface BookingModalProps {
@@ -38,7 +37,7 @@ export default function BookingModal({
         setFormData(prev => ({ ...prev, service: match.title }));
       }
     } else if (initialProcedureTitle) {
-      setFormData(prev => ({ ...prev, service: `Procedure: ${initialProcedureTitle}`, shiftDuration: 'Per Visit' }));
+      setFormData(prev => ({ ...prev, service: `Procedure: ${initialProcedureTitle}`, shiftDuration: 'Per Visit Procedure' }));
     } else if (initialEquipmentTitle) {
       setFormData(prev => ({ ...prev, service: `Equipment: ${initialEquipmentTitle}` }));
     }
@@ -46,6 +45,11 @@ export default function BookingModal({
 
   // Staff gender and shift length don't apply to an equipment enquiry
   const isEquipment = formData.service.startsWith('Equipment: ');
+
+  // Every time the modal is reopened, start from the form again
+  useEffect(() => {
+    if (isOpen) setIsSubmitted(false);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -56,15 +60,9 @@ export default function BookingModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Must run directly inside the submit event, or the browser blocks the new tab
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
     setIsSubmitted(true);
-
-    // Quiet monochrome confetti
-    confetti({
-      particleCount: 90,
-      spread: 70,
-      origin: { y: 0.6 },
-      colors: ['#0a0a0a', '#ffffff', '#a3a3a3'],
-    });
   };
 
   const staffLines = isEquipment
@@ -111,7 +109,7 @@ ${staffLines}📝 *Notes:* ${formData.notes || 'N/A'}`;
               <div>
                 <span className="pill mb-3">24/7 home care booking</span>
                 <h3 className="text-xl sm:text-2xl font-semibold leading-tight">
-                  {isSubmitted ? 'Request confirmed' : isEquipment ? 'Medical equipment enquiry' : 'Book home nursing / caregiver'}
+                  {isSubmitted ? 'One more step' :isEquipment ? 'Medical equipment enquiry' : 'Book home nursing / caregiver'}
                 </h3>
               </div>
               <button
@@ -128,21 +126,19 @@ ${staffLines}📝 *Notes:* ${formData.notes || 'N/A'}`;
               {isSubmitted ? (
                 <div className="text-center py-4">
                   <div className="w-16 h-16 rounded-full bg-ink text-paper flex items-center justify-center mx-auto mb-5">
-                    <CheckCircle2 className="w-8 h-8" strokeWidth={1.75} />
+                    <MessageSquareHeart className="w-8 h-8" strokeWidth={1.75} />
                   </div>
-                  <h4 className="text-2xl font-semibold mb-2">
-                    Thank you, {formData.patientName || 'valued patient'}!
-                  </h4>
+                  <h4 className="text-2xl font-semibold mb-2">Press send in WhatsApp</h4>
                   <p className="text-muted text-sm mb-7 leading-relaxed">
                     Your request for <strong className="text-ink">{formData.service}</strong> in{' '}
-                    <strong className="text-ink">{formData.city}</strong> has been received. Our team will contact{' '}
-                    <strong className="text-ink">{formData.phone}</strong> shortly.
+                    <strong className="text-ink">{formData.city}</strong> reaches our team only after you send the
+                    message in WhatsApp.
                   </p>
 
                   <div className="space-y-3">
                     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full">
                       <MessageSquareHeart className="w-4 h-4" />
-                      <span>Send directly via WhatsApp</span>
+                      <span>WhatsApp didn't open? Tap here</span>
                     </a>
                     <a href={`tel:${COMPANY_INFO.phone}`} className="btn btn-outline w-full">
                       <Phone className="w-4 h-4" />
@@ -272,7 +268,7 @@ ${staffLines}📝 *Notes:* ${formData.notes || 'N/A'}`;
                   </div>
 
                   <button type="submit" className="btn btn-primary w-full !py-4">
-                    Submit booking request
+                    Send request on WhatsApp
                   </button>
                 </form>
               )}
