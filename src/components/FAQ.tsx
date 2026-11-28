@@ -38,7 +38,7 @@ export default function FAQ({ onOpenBooking }: FAQProps) {
           {/* Sticky left column */}
           <div className="lg:col-span-5 lg:sticky lg:top-28">
             <SectionHeading
-              index="09"
+              index="10"
               icon={HelpCircle}
               eyebrow="Got questions?"
               title="Home Nursing in Surat –"

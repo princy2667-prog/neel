@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2, Phone, MessageSquareHeart, MapPin } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { COMPANY_INFO, SERVICES_DATA, PROCEDURES_DATA } from '../data/medicareData';
+import { COMPANY_INFO, SERVICES_DATA, PROCEDURES_DATA, EQUIPMENT_DATA } from '../data/medicareData';
 
 interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialServiceId?: string;
   initialProcedureTitle?: string;
+  initialEquipmentTitle?: string;
 }
 
 export default function BookingModal({
   isOpen,
   onClose,
   initialServiceId,
-  initialProcedureTitle
+  initialProcedureTitle,
+  initialEquipmentTitle
 }: BookingModalProps) {
   const [formData, setFormData] = useState({
     patientName: '',
@@ -37,8 +39,13 @@ export default function BookingModal({
       }
     } else if (initialProcedureTitle) {
       setFormData(prev => ({ ...prev, service: `Procedure: ${initialProcedureTitle}`, shiftDuration: 'Per Visit' }));
+    } else if (initialEquipmentTitle) {
+      setFormData(prev => ({ ...prev, service: `Equipment: ${initialEquipmentTitle}` }));
     }
-  }, [initialServiceId, initialProcedureTitle]);
+  }, [initialServiceId, initialProcedureTitle, initialEquipmentTitle]);
+
+  // Staff gender and shift length don't apply to an equipment enquiry
+  const isEquipment = formData.service.startsWith('Equipment: ');
 
   useEffect(() => {
     if (!isOpen) return;
@@ -60,15 +67,19 @@ export default function BookingModal({
     });
   };
 
+  const staffLines = isEquipment
+    ? ''
+    : `👩‍⚕️ *Staff Gender Preference:* ${formData.genderPref}
+⏱️ *Shift Duration:* ${formData.shiftDuration}
+`;
+
   const whatsappMessage = `*NEW HOME CARE REQUEST - HEALTHMITRA MEDICARE*
 ----------------------------------------
 👤 *Patient:* ${formData.patientName || 'Not specified'}
 📞 *Phone:* ${formData.phone}
 📍 *City:* ${formData.city}
 🩺 *Service/Procedure:* ${formData.service}
-👩‍⚕️ *Staff Gender Preference:* ${formData.genderPref}
-⏱️ *Shift Duration:* ${formData.shiftDuration}
-📝 *Notes:* ${formData.notes || 'N/A'}`;
+${staffLines}📝 *Notes:* ${formData.notes || 'N/A'}`;
 
   const whatsappUrl = `https://wa.me/${COMPANY_INFO.whatsapp}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -100,7 +111,7 @@ export default function BookingModal({
               <div>
                 <span className="pill mb-3">24/7 home care booking</span>
                 <h3 className="text-xl sm:text-2xl font-semibold leading-tight">
-                  {isSubmitted ? 'Request confirmed' : 'Book home nursing / caregiver'}
+                  {isSubmitted ? 'Request confirmed' : isEquipment ? 'Medical equipment enquiry' : 'Book home nursing / caregiver'}
                 </h3>
               </div>
               <button
@@ -207,39 +218,46 @@ export default function BookingModal({
                           <option key={p.id} value={`Procedure: ${p.title}`}>Procedure - {p.title}</option>
                         ))}
                       </optgroup>
+                      <optgroup label="Medical Equipment">
+                        {EQUIPMENT_DATA.map((e) => (
+                          <option key={e.id} value={`Equipment: ${e.title}`}>{e.title}</option>
+                        ))}
+                      </optgroup>
                     </select>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <div>
-                      <label htmlFor="b-gender" className="field-label">Staff gender</label>
-                      <select
-                        id="b-gender"
-                        value={formData.genderPref}
-                        onChange={e => setFormData({ ...formData, genderPref: e.target.value })}
-                        className="field !px-3 !text-[13px]"
-                      >
-                        <option value="Female Nurse">Female Nurse (F)</option>
-                        <option value="Male Nurse">Male Nurse (M)</option>
-                        <option value="Any Qualified Staff">Any Qualified Staff</option>
-                      </select>
-                    </div>
+                  {!isEquipment && (
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label htmlFor="b-gender" className="field-label">Staff gender</label>
+                        <select
+                          id="b-gender"
+                          value={formData.genderPref}
+                          onChange={e => setFormData({ ...formData, genderPref: e.target.value })}
+                          className="field !px-3 !text-[13px]"
+                        >
+                          <option value="Female Nurse">Female Nurse (F)</option>
+                          <option value="Male Nurse">Male Nurse (M)</option>
+                          <option value="Any Qualified Staff">Any Qualified Staff</option>
+                        </select>
+                      </div>
 
-                    <div>
-                      <label htmlFor="b-shift" className="field-label">Shift duration</label>
-                      <select
-                        id="b-shift"
-                        value={formData.shiftDuration}
-                        onChange={e => setFormData({ ...formData, shiftDuration: e.target.value })}
-                        className="field !px-3 !text-[13px]"
-                      >
-                        <option value="24 Hours Shift">24 Hours (Full Time)</option>
-                        <option value="12 Hours Day Shift">12 Hours (Day)</option>
-                        <option value="12 Hours Night Shift">12 Hours (Night)</option>
-                        <option value="Per Visit Procedure">Per Visit (Procedure)</option>
-                      </select>
+                      <div>
+                        <label htmlFor="b-shift" className="field-label">Shift duration</label>
+                        <select
+                          id="b-shift"
+                          value={formData.shiftDuration}
+                          onChange={e => setFormData({ ...formData, shiftDuration: e.target.value })}
+                          className="field !px-3 !text-[13px]"
+                        >
+                          <option value="24 Hours Shift">24 Hours (Full Time)</option>
+                          <option value="12 Hours Day Shift">12 Hours (Day)</option>
+                          <option value="12 Hours Night Shift">12 Hours (Night)</option>
+                          <option value="Per Visit Procedure">Per Visit (Procedure)</option>
+                        </select>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   <div>
                     <label htmlFor="b-notes" className="field-label">Medical condition / address notes</label>

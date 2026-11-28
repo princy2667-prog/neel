@@ -17,6 +17,13 @@ export interface ProcedureItem {
   iconName: string;
 }
 
+export interface EquipmentItem {
+  id: string;
+  title: string;
+  desc: string;
+  iconName: string;
+}
+
 export interface FaqItem {
   id: string;
   question: string;

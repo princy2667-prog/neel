@@ -15,7 +15,7 @@ export default function HowItWorks({ onOpenBooking }: HowItWorksProps) {
     <section className="py-20 lg:py-28 bg-paper relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="05"
+          index="06"
           icon={ListOrdered}
           eyebrow="Simple 4-step process"
           title="How to Book a Home Nurse"

@@ -1,4 +1,4 @@
-import { ServiceItem, ProcedureItem, FaqItem, CareCategoryItem } from '../types';
+import { ServiceItem, ProcedureItem, EquipmentItem, FaqItem, CareCategoryItem } from '../types';
 
 export const COMPANY_INFO = {
   name: "HEALTHMITRA MEDICARE",
@@ -201,6 +201,45 @@ export const PROCEDURES_DATA: ProcedureItem[] = [
     desc: "Certified physiotherapist visits for stroke rehab, mobility, and joint pain.",
     time: "45-60 mins",
     iconName: "Dumbbell"
+  }
+];
+
+export const EQUIPMENT_DATA: EquipmentItem[] = [
+  {
+    id: "ventilator",
+    title: "Ventilator",
+    desc: "Breathing support for patients who need assisted ventilation at home.",
+    iconName: "Wind"
+  },
+  {
+    id: "cardiac-monitor",
+    title: "Cardiac Monitor",
+    desc: "Continuous tracking of heart rhythm and vital signs.",
+    iconName: "Activity"
+  },
+  {
+    id: "infusion-pump",
+    title: "Infusion Pump",
+    desc: "Controlled delivery of IV fluids and medicines at a set rate.",
+    iconName: "Droplets"
+  },
+  {
+    id: "icu-bed",
+    title: "ICU Bed",
+    desc: "Adjustable patient bed for comfortable positioning and easier nursing care.",
+    iconName: "BedSingle"
+  },
+  {
+    id: "oxygen-machine",
+    title: "Oxygen Machine",
+    desc: "Oxygen support for patients who need help maintaining oxygen levels.",
+    iconName: "Cylinder"
+  },
+  {
+    id: "bp-monitoring",
+    title: "BP Monitoring",
+    desc: "Regular blood pressure checks to keep track of the patient's condition.",
+    iconName: "Gauge"
   }
 ];
 

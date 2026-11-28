@@ -14,7 +14,7 @@ export default function SuratCoverage({ onOpenBooking }: SuratCoverageProps) {
     <section id="areas" className="py-20 lg:py-28 bg-paper relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="03"
+          index="04"
           icon={Map}
           eyebrow="Surat service areas"
           title="Home Nursing & Healthcare Across"

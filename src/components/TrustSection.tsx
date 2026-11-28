@@ -46,7 +46,7 @@ export default function TrustSection() {
           {/* Copy */}
           <Reveal delay={0.1} className="lg:col-span-6 mt-6 lg:mt-0">
             <div className="flex items-center gap-3 mb-6">
-              <span className="text-xs font-medium tabular-nums text-muted">07</span>
+              <span className="text-xs font-medium tabular-nums text-muted">08</span>
               <span className="h-px w-8 bg-line" aria-hidden="true" />
               <span className="eyebrow">
                 <Heart className="w-3.5 h-3.5" /> Compassionate excellence

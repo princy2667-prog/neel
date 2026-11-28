@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Procedures from './components/Procedures';
+import Equipment from './components/Equipment';
 import TwentyFourSevenCare from './components/TwentyFourSevenCare';
 import WhyChooseUs from './components/WhyChooseUs';
 import HowItWorks from './components/HowItWorks';
@@ -25,21 +26,33 @@ export default function App() {
   const [selectedServiceId, setSelectedServiceId] = useState<string | undefined>(undefined);
   const [selectedProcedureTitle, setSelectedProcedureTitle] = useState<string | undefined>(undefined);
 
+  const [selectedEquipmentTitle, setSelectedEquipmentTitle] = useState<string | undefined>(undefined);
+
   const handleOpenBooking = () => {
     setSelectedServiceId(undefined);
     setSelectedProcedureTitle(undefined);
+    setSelectedEquipmentTitle(undefined);
     setBookingModalOpen(true);
   };
 
   const handleOpenBookingWithService = (serviceId: string) => {
     setSelectedServiceId(serviceId);
     setSelectedProcedureTitle(undefined);
+    setSelectedEquipmentTitle(undefined);
     setBookingModalOpen(true);
   };
 
   const handleOpenBookingWithProcedure = (procedureTitle: string) => {
     setSelectedProcedureTitle(procedureTitle);
     setSelectedServiceId(undefined);
+    setSelectedEquipmentTitle(undefined);
+    setBookingModalOpen(true);
+  };
+
+  const handleOpenBookingWithEquipment = (equipmentTitle: string) => {
+    setSelectedEquipmentTitle(equipmentTitle);
+    setSelectedServiceId(undefined);
+    setSelectedProcedureTitle(undefined);
     setBookingModalOpen(true);
   };
 
@@ -64,6 +77,7 @@ export default function App() {
         <ServiceMarquee />
         <Services onOpenBookingWithService={handleOpenBookingWithService} />
         <Procedures onOpenBookingWithProcedure={handleOpenBookingWithProcedure} />
+        <Equipment onOpenBookingWithEquipment={handleOpenBookingWithEquipment} />
         <TwentyFourSevenCare onOpenBooking={handleOpenBooking} />
         <SuratCoverage onOpenBooking={handleOpenBooking} />
         <WhyChooseUs />
@@ -87,6 +101,7 @@ export default function App() {
         onClose={() => setBookingModalOpen(false)}
         initialServiceId={selectedServiceId}
         initialProcedureTitle={selectedProcedureTitle}
+        initialEquipmentTitle={selectedEquipmentTitle}
       />
       </div>
       </MotionConfig>

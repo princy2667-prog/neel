@@ -8,6 +8,7 @@ const quickLinks = [
   ['Home', '#home'],
   ['Services', '#services'],
   ['Procedures', '#procedures'],
+  ['Medical Equipment', '#equipment'],
   ['Surat Areas', '#areas'],
   ['About Us', '#about'],
   ['Why Choose Us', '#why-us'],

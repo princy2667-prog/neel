@@ -40,7 +40,7 @@ export default function WhyChooseUs() {
     <section id="why-us" className="py-20 lg:py-28 bg-surface relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          index="04"
+          index="05"
           icon={Building2}
           eyebrow="Excellence & reliability"
           title="Why Surat Families Choose"

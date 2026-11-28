@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Phone, Mail, MapPin, Send, CheckCircle2 } from 'lucide-react';
-import { COMPANY_INFO, SERVICES_DATA, PROCEDURES_DATA } from '../data/medicareData';
+import { COMPANY_INFO, SERVICES_DATA, PROCEDURES_DATA, EQUIPMENT_DATA } from '../data/medicareData';
 import { ContactFormData } from '../types';
 import SectionHeading from './SectionHeading';
 import Reveal from './Reveal';
@@ -63,7 +63,7 @@ export default function Contact() {
     <section id="contact" className="py-20 lg:py-28 bg-surface relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <SectionHeading
-          index="08"
+          index="09"
           icon={Mail}
           eyebrow="Get in touch"
           title="Contact Your Home Nursing Team"
@@ -217,6 +217,11 @@ export default function Contact() {
                       <optgroup label="Clinical Procedures">
                         {PROCEDURES_DATA.map((p) => (
                           <option key={p.id} value={`Procedure: ${p.title}`}>Procedure - {p.title}</option>
+                        ))}
+                      </optgroup>
+                      <optgroup label="Medical Equipment">
+                        {EQUIPMENT_DATA.map((e) => (
+                          <option key={e.id} value={`Equipment: ${e.title}`}>{e.title}</option>
                         ))}
                       </optgroup>
                     </select>
